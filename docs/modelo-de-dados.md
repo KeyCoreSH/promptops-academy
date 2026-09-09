@@ -1,50 +1,111 @@
-# Modelo de Dados - Promptops Academy
+# Modelo de Dados — PromptOps Academy
 
-Estrutura das entidades para a persistência local em JSON e localStorage.
+Estrutura das entidades e schema para a persistência local em JSON e `localStorage`.
 
-## Entidades
+---
 
-### 1. Prompt
-- `id`: String (ex: "OP-02")
-- `title`: String
+## 1. Entidades Principais
+
+### 1.1. Prompt
+Representa o registro principal de um prompt.
+- `id`: String (ex: `"OP-02"`)
+- `title`: String (mínimo de 8 caracteres)
 - `categoryId`: String
 - `subcategoryId`: String
 - `tags`: Array de Strings
-- `author`: String
-- `status`: String ("rascunho" | "em_revisao" | "publicado" | "arquivado")
-- `maturity`: String ("experimental" | "em_validacao" | "validado")
-- `currentVersionId`: String (ex: "OP-02-v2")
+- `problem`: String (problema que o prompt busca resolver)
+- `objective`: String (objetivo do prompt)
+- `responsible`: String / Autor
+- `status`: String (`"rascunho"` | `"em_revisao"` | `"publicado"` | `"arquivado"`)
+- `maturity`: String (`"experimental"` | `"em_validacao"` | `"validado"`)
+- `currentVersionId`: String (ex: `"OP-02-v1"`)
 
-### 2. Versão
-- `id`: String (ex: "OP-02-v1")
-- `promptId`: String
-- `number`: Number
-- `text`: String
-- `role`: String
-- `objective`: String
-- `context`: String
-- `constraints`: String
-- `format`: String
-- `qualityCriteria`: String
-- `nextAction`: String
-- `createdAt`: String
+### 1.2. Version (Versão)
+Representa uma versão específica de um prompt.
+- `id`: String (ex: `"OP-02-v1"`)
+- `promptId`: String (ID do prompt pai)
+- `number`: Number (número da versão)
+- `text`: String (texto completo do prompt - mínimo de 80 caracteres)
+- `context`: String (contexto necessário)
+- `restrictions`: String (restrições)
+- `format`: String (formato esperado da resposta)
+- `qualityCriteria`: String (critérios de qualidade)
+- `nextAction`: String (próxima ação)
+- `author`: String (responsável pela alteração)
+- `date`: String (data YYYY-MM-DD)
+- `changeReason`: String (motivo da alteração)
 
-### 3. Teste
-- `id`: String (ex: "T-001")
+### 1.3. Test (Teste)
+Representa a execução e avaliação de um teste em uma versão específica.
+- `id`: String
 - `promptId`: String
 - `versionId`: String
-- `input`: String
-- `expected`: String
-- `obtained`: String
-- `evaluation`: String ("aprovado" | "ajustar" | "reprovado")
-- `failureReason`: String
-- `recommendedAdjustment`: String
-- `author`: String
+- `input`: String (entrada utilizada)
+- `expected`: String (resultado esperado)
+- `obtained`: String (resultado obtido)
+- `evaluation`: String (`"aprovado"` | `"reprovado"` | `"com_ressalvas"`)
+- `failure`: String (falha identificada, se houver)
+- `adjustment`: String (ajuste recomendado)
+- `responsible`: String
 - `date`: String
+- `nextTest`: String
 
-### 4. Relação
-- `originId`: String
-- `targetId`: String
-- `type`: String ("anterior" | "proximo" | "depende_de" | "alimenta" | "alternativa" | "revisao" | "relacionado")
+### 1.4. Relation (Relação)
+Representa uma conexão entre dois prompts.
+- `sourceId`: String (prompt de origem)
+- `targetId`: String (prompt de destino)
+- `type`: String (`"anterior"` | `"proximo"` | `"depende_de"` | `"alimenta"` | `"alternativa"` | `"revisao"` | `"relacionado"`)
 - `description`: String
-EOF
+
+### 1.5. Pipeline (Fluxo)
+Representa um fluxo sequencial de trabalho formado por prompts.
+- `id`: String
+- `name`: String
+- `objective`: String
+- `steps`: Array de Objetos:
+  - `promptId`: String
+  - `input`: String
+  - `expectedOutput`: String
+
+### 1.6. Category (Categoria)
+Representa as categorias de classificação dos prompts.
+- `id`: String
+- `name`: String
+- `subcategories`: Array de Strings
+
+**Categorias Obrigatórias:**
+1. Operações e Processos
+2. Conteúdo e Comunicação
+3. Produto e Desenvolvimento
+4. Dados e Análise
+5. Segurança e Governança
+6. Aprendizado e Pesquisa
+
+---
+
+## 2. Regras de Validação
+
+1. **Título:** Deve possuir no mínimo 8 caracteres.
+2. **Corpo do Prompt:** Deve possuir no mínimo 80 caracteres.
+3. **Obrigatoriedade:** Campos obrigatórios não podem ser salvos vazios.
+4. **Unicidade de IDs:** Todos os IDs devem ser estritamente únicos.
+5. **Integridade de Subcategoria:** Uma subcategoria deve obrigatoriamente pertencer à categoria selecionada.
+6. **Integridade de Testes:** Um teste deve estar vinculado a um prompt e a uma versão existentes.
+7. **Integridade de Relações:** Uma relação não pode apontar para um prompt inexistente.
+8. **Versionamento:** Alterações no conteúdo operacional devem gerar uma nova versão, preservando o histórico anterior.
+9. **Duplicidade:** A verificação de duplicidade exata considera o texto do prompt após `trim()`.
+
+---
+
+## 3. Estrutura do JSON Inicial
+
+```json
+{
+  "schemaVersion": 1,
+  "prompts": [],
+  "versions": [],
+  "tests": [],
+  "relations": [],
+  "pipelines": [],
+  "categories": []
+}
