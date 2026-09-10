@@ -46,7 +46,7 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
   * Pesquisa Orientada
   * Estudo Aplicado
 
-### 2.2. Status de Registro
+### 2.2. Status de Registro (Nomes Oficiais)
 
 * Rascunho
 * Em Revisão
@@ -73,6 +73,8 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 * Seguir na Pipeline
 * Etapa Anterior
 * Próxima Etapa
+* Exportar Dados (JSON)
+* Importar Dados
 
 ---
 
@@ -81,15 +83,15 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 ### 3.1. Tela de Início e Catálogo
 
 * **Título:** PromptOps Academy - Sistema de Gestão de prompts
-* **Descrição de Apoio:** Organize contextos, resgitre testes, transforme boas interações com IA em processos reutilizáveis.
-* **Busca (Botão):** Buscar por título, objetivo, tags, palavras chaves, etc...
+* **Descrição de Apoio:** Organize contextos, registre testes, transforme boas interações com IA em processos reutilizáveis.
+* **Busca (Botão):** Buscar por título, objetivo, tags, palavras-chaves, etc...
 * **Painel de Contadores:** Prompts cadastrados, pipelines ativos, testes realizados, loops comprovados.
 
 ---
 
 ### 3.2. Cadastro e Edição de Prompts
 
-#### 3.2.1. Funções
+#### 3.2.1. Funções e Schema Canônico
 
 * **Campo:** Título do Prompt
   * **Rótulo:** Título
@@ -109,7 +111,7 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 
 * **Campo:** Status
   * **Rótulo:** Status
-  * **Ajuda:** Indique a fase de publicação e o grau de validação no contexto informado.
+  * **Ajuda:** Indique a fase de publicação e o grau de validação no contexto informado (Valores aceitos: `Rascunho`, `Em Revisão`, `Publicado`, `Arquivado`).
 
 * **Campo:** Texto do Prompt
   * **Rótulo:** Instrução (Prompt)
@@ -147,10 +149,11 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 
 * **Título com menos de 8 caracteres:** "O título precisa ter pelo menos 8 caracteres."
 * **Título em branco:** "Informe um título para identificar este prompt."
-* **Prompt com menos de 80 caracteres:** "O texto do prompt precisa ter pelo menos 80 caracteres."
+* **Prompt com menos de 80 caracteres:** "O texto do prompt precisa ter pelo menos 8 caracteres."
 * **Prompt em branco:** "O campo de instrução do prompt é obrigatório e precisa ser preenchido."
 * **Duplicidade exata de prompt:** "Já existe um prompt com este texto. Abra o registro existente para revisar ou criar uma nova versão."
 * **Categoria ou Subcategoria não selecionada:** "Selecione uma categoria e subcategoria válidas para classificar o prompt."
+* **Status Inválido ou Divergente:** "Selecione um status válido (`Rascunho`, `Em Revisão`, `Publicado`, `Arquivado`)."
 * **Campos obrigatórios pendentes:** "Preencha todos os campos obrigatórios antes de salvar o registro."
 
 ---
@@ -171,7 +174,7 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 
   * **Avaliação:**
     * **Rótulo:** Avaliação do Teste
-    * **Ajuda:** Escolha Aprovado, Ajustar ou Reprovado com base nos critérios de qualidade.
+    * **Ajuda:** Escolha `Aprovado`, `Ajustar` ou `Reprovado` com base nos critérios de qualidade.
 
   * **Falha e Ajuste:**
     * **Rótulo:** Falha / Ajuste Recomendado
@@ -192,11 +195,56 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 
 ---
 
-### 3.5. Estados de Interface (UX States) e Notificações
+### 3.5. Modais e Ações Destrutivas (Confirmação Explícita)
 
+* **Excluir Prompt:**
+  * **Título Modal:** "Excluir Prompt"
+  * **Texto de Consequência:** "Tem certeza de que deseja excluir o prompt '**[Nome do Prompt]**'? Esta ação é permanente e apagarás todo o histórico de versões, testes e métricas vinculadas a este registro no seu dispositivo."
+  * **Botão Primário (Ação Destrutiva):** "Excluir Definitivamente"
+  * **Botão Secundário:** "Cancelar"
+
+* **Excluir Teste / Versão:**
+  * **Título Modal:** "Excluir Teste"
+  * **Texto de Consequência:** "Esta ação removerá permanentemente os dados deste teste. O resultado não poderá ser recuperado."
+  * **Botão Primário:** "Excluir Registro"
+  * **Botão Secundário:** "Cancelar"
+
+* **Limpar Todos os Dados / Reset:**
+  * **Título Modal:** "Limpar Armazenamento Local"
+  * **Texto de Consequência:** "Você está prestes a apagar todos os prompts, testes e pipelines salvos no seu navegador. Certifique-se de ter feito uma cópia de segurança (exportação JSON) antes de prosseguir."
+  * **Botão Primário:** "Apagar Tudo"
+  * **Botão Secundário:** "Cancelar"
+
+---
+
+### 3.6. Estados de Interface (UX States)
+
+#### 3.6.1. Estados Vazios (Empty States)
+
+* **Catálogo Sem Registros (Geral):** "Nenhum prompt cadastrado ainda. Clique em 'Novo Prompt' para registrar sua primeira instrução."
 * **Busca Sem Resultados no Catálogo:** "Nenhum prompt combina com esta busca. Ajuste o termo ou limpe os filtros."
 * **Histórico de Testes Vazio:** "Nenhum teste foi realizado para esta versão ainda. Copie a instrução, execute em uma ferramenta autorizada e registre o resultado."
+* **Pipelines Sem Etapas:** "Este pipeline ainda não possui etapas configuradas. Adicione prompts relacionados para formar o fluxo."
+
+#### 3.6.2. Estados de Carregamento (Loading States)
+
+* **Carregando Dados Gerais:** "Carregando seus prompts..."
+* **Processando Busca:** "Buscando no catálogo..."
+* **Exportando/Importando:** "Processando arquivo de dados, aguarde um momento..."
+
+#### 3.6.3. Indisponibilidade de Dados e Falhas de Processamento
+
+* **ID ou Link Quebrado:** "O prompt solicitado não foi encontrado ou foi removido. Clique abaixo para retornar ao catálogo."
+* **Erro ao Ler Dados:** "Não foi possível carregar os dados salvos. Atualize a página ou tente novamente em instantes."
+* **Arquivo Importado Inválido:** "O arquivo selecionado não possui a estrutura compatível com o schema canônico. Verifique a formatação do arquivo JSON."
+
+---
+
+### 3.7. Persistência de Dados e Armazenamento Local (localStorage)
+
+* **Aviso de Armazenamento Local (Banner/Tooltip Persistente):** "Seus dados estão armazenados localmente neste navegador. Para não perder seu trabalho ao limpar o histórico do navegador, exporte seus registros regularmente em JSON."
 * **Aviso de Sucesso ao Salvar:** "Prompt salvo neste navegador."
 * **Aviso de Sucesso ao Copiar:** "Texto da versão selecionada copiado para a área de transferência!"
-* **Erro de Armazenamento Local (localStorage):** "Não foi possível salvar. Seu texto continua no formulário para você não perder o trabalho."
-* **ID ou Link Quebrado:** "O prompt solicitado não foi encontrado ou foi removido. Clique abaixo para retornar ao catálogo."
+* **Sucesso na Exportação:** "Arquivo de backup gerado com sucesso! Guarde este JSON em um local seguro."
+* **Sucesso na Importação:** "Dados importados com sucesso! Seu catálogo foi atualizado."
+* **Erro de Armazenamento Local (localStorage Cheio/Bloqueado):** "Não foi possível salvar no armazenamento local do seu navegador. Copie seu texto para um arquivo externo para não perder o trabalho e faça uma limpeza nos registros antigos."
