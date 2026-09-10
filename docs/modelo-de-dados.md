@@ -1,6 +1,8 @@
-# Rascunho do Modelo de Dados — PromptOps Academy
+# Modelo de Dados — PromptOps Academy
 
 Estrutura das entidades e schema para a persistência local em JSON e `localStorage`.
+
+Este documento define o schema canônico de dados utilizado pelo projeto. A versão apresentada nesta documentação deve ser considerada a referência para a implementação e persistência dos dados da aplicação.
 
 ---
 
@@ -28,7 +30,7 @@ Representa uma versão específica de um prompt.
 
 - `id`: String (ex: `"OP-02-v1"`)
 - `promptId`: String (ID do prompt pai)
-- `number`: Number (número da versão)
+- `number`: Number (número inteiro positivo da versão)
 - `text`: String (texto completo do prompt - mínimo de 80 caracteres)
 - `context`: String (contexto necessário)
 - `restrictions`: String (restrições)
@@ -36,10 +38,11 @@ Representa uma versão específica de um prompt.
 - `qualityCriteria`: String (critérios de qualidade)
 - `nextAction`: String (próxima ação)
 - `author`: String (responsável pela alteração)
-- `date`: String (data YYYY-MM-DD)
+- `createdAt`: String (data de criação no formato YYYY-MM-DD)
 - `changeReason`: String (opcional; motivo da alteração)
 - `editorialChanges`: Array de Objetos (alterações editoriais que não geram uma nova versão):
-  - `date`: String (data da alteração)
+
+  - `createdAt`: String (data da alteração)
   - `author`: String (responsável pela alteração)
   - `description`: String (descrição da alteração)
   - `before`: String (conteúdo antes da alteração)
@@ -60,7 +63,7 @@ Representa a execução e avaliação de um teste em uma versão específica.
 - `failure`: String (falha identificada, se houver)
 - `adjustment`: String (ajuste recomendado)
 - `responsible`: String
-- `date`: String
+- `createdAt`: String (data do teste)
 - `nextTest`: String (próximo teste)
 
 ### 1.4. Relation (Relação)
@@ -80,6 +83,7 @@ Representa um fluxo sequencial de trabalho formado por prompts.
 - `name`: String
 - `objective`: String
 - `steps`: Array de Objetos:
+
   - `promptId`: String
   - `input`: String
   - `expectedOutput`: String
@@ -103,22 +107,65 @@ Representa as categorias de classificação dos prompts.
 
 ---
 
-## 2. Regras de Validação
+## 2. Regras de Validação e Integridade
 
 1. **Título:** Deve possuir no mínimo 8 caracteres.
-2. **Corpo do Prompt:** Deve possuir no mínimo 80 caracteres.
-3. **Obrigatoriedade:** Campos obrigatórios não podem ser salvos vazios.
-4. **Unicidade de IDs:** Todos os IDs devem ser estritamente únicos.
-5. **Integridade de Subcategoria:** Uma subcategoria deve obrigatoriamente pertencer à categoria selecionada.
-6. **Integridade de Testes:** Um teste deve estar vinculado a um prompt e a uma versão existentes.
-7. **Integridade de Relações:** Uma relação não pode apontar para um prompt inexistente.
-8. **Versionamento:** Alterações no conteúdo operacional capazes de alterar o comportamento, a interpretação, o formato ou a resposta esperada da IA devem gerar uma nova versão, preservando o histórico anterior.
-9. **Alterações Editoriais:** Correções que não alterem o sentido do prompt não devem gerar uma nova versão, mas devem ser registradas em `editorialChanges`, contendo data, autor, descrição, conteúdo anterior e conteúdo posterior.
-10. **Duplicidade:** A verificação de duplicidade exata considera o texto do prompt após `trim()`.
+
+2. **Corpo do Prompt:** O campo `text` deve possuir no mínimo 80 caracteres.
+
+3. **Obrigatoriedade:** Campos obrigatórios não podem ser salvos vazios ou ausentes.
+
+4. **Unicidade de IDs:** Todos os IDs devem ser únicos dentro do conjunto de entidades correspondente e não podem ser vazios.
+
+5. **Formato de IDs:** Os IDs devem seguir um padrão consistente com a entidade e não podem conter valores nulos ou inválidos.
+
+6. **Integridade de Subcategoria:** Uma subcategoria deve obrigatoriamente pertencer à categoria indicada em `categoryId`.
+
+7. **Integridade de Testes:** Um teste deve estar vinculado a um `promptId` e a um `versionId` existentes.
+
+8. **Integridade de Versões:** Cada versão deve possuir um `promptId` correspondente a um prompt existente.
+
+9. **Unicidade de Versão:** O campo `number` deve ser um número inteiro positivo e não pode se repetir dentro do mesmo prompt.
+
+10. **Integridade de Referência da Versão Atual:** O `currentVersionId` de um prompt deve corresponder a uma versão existente cujo `promptId` seja o mesmo do prompt.
+
+11. **Integridade de Relações:** Uma relação não pode apontar para um prompt inexistente. Os valores de `sourceId` e `targetId` devem corresponder a IDs de prompts existentes.
+
+12. **Integridade de Pipelines:** Cada `promptId` utilizado em `steps` deve corresponder a um prompt existente.
+
+13. **Versionamento:** Alterações no conteúdo operacional capazes de alterar o comportamento, a interpretação, o formato ou a resposta esperada da IA devem gerar uma nova versão, preservando o histórico anterior.
+
+14. **Alterações Editoriais:** Correções que não alterem o sentido do prompt não devem gerar uma nova versão, mas devem ser registradas em `editorialChanges`, contendo data, autor, descrição, conteúdo anterior e conteúdo posterior.
+
+15. **Referências Existentes:** Nenhum campo de referência (`categoryId`, `subcategoryId`, `promptId`, `versionId`, `currentVersionId`, `sourceId` ou `targetId`) deve apontar para um registro inexistente.
+
+16. **Duplicidade:** A verificação de duplicidade exata considera o texto do prompt após a aplicação de `trim()`.
+
+17. **Consistência de Schema:** Os registros persistidos devem seguir os campos, tipos e valores definidos neste documento. Campos não previstos no schema não devem ser considerados obrigatórios para a persistência.
 
 ---
 
-## 3. Estrutura do JSON Inicial
+## 3. Privacidade e Dados Sensíveis
+
+1. **Minimização de dados:** O JSON e o `localStorage` devem armazenar somente os dados necessários para o funcionamento da aplicação.
+
+2. **Dados sensíveis:** Não devem ser armazenadas no JSON ou `localStorage` informações pessoais sensíveis ou desnecessárias para a finalidade do sistema.
+
+3. **Credenciais:** Senhas, tokens de autenticação, chaves de API, credenciais de acesso e outros segredos não devem ser armazenados no `localStorage` nem incluídos em arquivos JSON exportados.
+
+4. **Dados pessoais:** Documentos de identificação, informações financeiras, dados de contato pessoais ou outras informações pessoais que não sejam necessárias para o funcionamento do sistema não devem ser armazenados.
+
+5. **Conteúdo dos prompts e testes:** Antes de armazenar ou exportar prompts, testes e seus respectivos resultados, deve-se evitar a inclusão de informações pessoais, confidenciais ou dados pertencentes a terceiros.
+
+6. **Exportações:** Os arquivos JSON exportados devem respeitar as mesmas regras de privacidade aplicadas aos dados armazenados localmente. A exportação não deve incluir credenciais, tokens ou dados pessoais sensíveis.
+
+7. **Dados necessários:** Quando um dado pessoal for indispensável para determinada funcionalidade, deve ser armazenado somente na extensão necessária para essa finalidade.
+
+8. **Persistência local:** O uso de `localStorage` deve ser limitado a dados apropriados para armazenamento no dispositivo do usuário, evitando informações que exigiriam mecanismos de proteção mais robustos.
+
+---
+
+## 4. Estrutura do JSON Inicial
 
 ```json
 {
@@ -130,4 +177,3 @@ Representa as categorias de classificação dos prompts.
   "pipelines": [],
   "categories": []
 }
-```
