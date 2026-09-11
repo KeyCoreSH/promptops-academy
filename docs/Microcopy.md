@@ -46,12 +46,10 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
   * Pesquisa Orientada
   * Estudo Aplicado
 
-### 2.2. Status de Registro (Nomes Oficiais)
+### 2.2. Status de Registro e Maturidade (Nomes Oficiais)
 
-* Rascunho
-* Em Revisão
-* Publicado
-* Arquivado
+* **Status:** Rascunho / Em revisão / Publicado / Arquivado
+* **Maturidade:** Experimental / Em validação / Validado
 
 ### 2.3. Avaliação do Teste
 
@@ -70,7 +68,7 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 * Copiar
 * Colar
 * Registrar Teste
-* Seguir na Pipeline
+* Seguir no Pipeline
 * Etapa Anterior
 * Próxima Etapa
 * Exportar Dados (JSON)
@@ -83,8 +81,8 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 ### 3.1. Tela de Início e Catálogo
 
 * **Título:** PromptOps Academy - Sistema de Gestão de prompts
-* **Descrição de Apoio:** Organize contextos, registre testes, transforme boas interações com IA em processos reutilizáveis.
-* **Busca (Botão):** Buscar por título, objetivo, tags, palavras-chaves, etc...
+* **Descrição de Apoio:** Organize contextos, registrar testes, transforme boas interações com IA em processos reutilizáveis.
+* **Busca (Botão):** Buscar por título, objetivo ou tags
 * **Painel de Contadores:** Prompts cadastrados, pipelines ativos, testes realizados, loops comprovados.
 
 ---
@@ -109,17 +107,13 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
   * **Rótulo:** Responsável
   * **Ajuda:** Nome do integrante da equipe responsável pelo registro ou manutenção.
 
-* **Campo:** Status
-  * **Rótulo:** Status
-  * **Ajuda:** Indique a fase de publicação e o grau de validação no contexto informado (Valores aceitos: `Rascunho`, `Em Revisão`, `Publicado`, `Arquivado`).
+* **Campo:** Status e Maturidade
+  * **Rótulo:** Status / Maturidade
+  * **Ajuda:** Indique a fase de publicação (`Rascunho`, `Em revisão`, `Publicado`, `Arquivado`) e a maturidade (`Experimental`, `Em validação`, `Validado`).
 
 * **Campo:** Texto do Prompt
   * **Rótulo:** Instrução (Prompt)
   * **Ajuda:** Escreva ou cole a instrução completa. Mínimo de 80 caracteres. Mantenha os marcadores de entrada visíveis.
-
-* **Campo:** Papel
-  * **Rótulo:** Papel da IA
-  * **Ajuda:** Qual função a IA deve desempenhar. Exemplo: analista de operações, revisor editorial.
 
 * **Campo:** Objetivo
   * **Rótulo:** Objetivo Concreto
@@ -153,9 +147,9 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 * **Prompt em branco:** "O campo de instrução do prompt é obrigatório e precisa ser preenchido."
 * **Duplicidade exata de prompt:** "Já existe um prompt com este texto. Abra o registro existente para revisar ou criar uma nova versão."
 * **Categoria ou Subcategoria não selecionada:** "Selecione uma categoria e subcategoria válidas para classificar o prompt."
-* **Status Inválido ou Divergente:** "Selecione um status válido (`Rascunho`, `Em Revisão`, `Publicado`, `Arquivado`)."
+* **Status Inválido ou Divergente:** "Selecione um status válido (`Rascunho`, `Em revisão`, `Publicado`, `Arquivado`)."
 * **Campos obrigatórios pendentes:** "Preencha todos os campos obrigatórios antes de salvar o registro."
-* **Falha de identificação por meio de busca:** "Não encontramos nada para a sua busca. Tente novamente."
+* **Falha de identificação por meio de busca:** "Nenhum prompt combina com esta busca. Ajuste o termo ou limpe os filtros."
 
 ---
 
@@ -165,9 +159,17 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 
 * **Registro de Teste (Loops):**
 
+  * **Versão:**
+    * **Rótulo:** Versão
+    * **Ajuda:** Indique a versão do prompt que está sendo testada.
+
   * **Entrada Utilizada:**
     * **Rótulo:** Entrada
     * **Ajuda:** Cole o relato ou texto fictício utilizado na execução da ferramenta.
+
+  * **Resultado Esperado:**
+    * **Rótulo:** Resultado Esperado
+    * **Ajuda:** Descreva o resultado esperado conforme os critérios do schema.
 
   * **Resultado Obtido:**
     * **Rótulo:** Resultado da IA
@@ -180,6 +182,10 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
   * **Falha e Ajuste:**
     * **Rótulo:** Falha / Ajuste Recomendado
     * **Ajuda:** Descreva o motivo da reprovação ou o que precisa mudar na instrução para a próxima versão.
+
+  * **Próximo Teste:**
+    * **Rótulo:** Próximo Teste
+    * **Ajuda:** Indique os passos ou condições para a realização do próximo teste.
 
 * **Mensagem de Confirmação:** "Resultado do teste registrado com sucesso no histórico da versão."
 
@@ -204,15 +210,12 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
   * **Botão Primário (Ação Destrutiva):** "Excluir Definitivamente"
   * **Botão Secundário:** "Cancelar"
 
-* **Excluir Teste / Versão:**
-  * **Título Modal:** "Excluir Teste"
-  * **Texto de Consequência:** "Esta ação removerá permanentemente os dados deste teste. O resultado não poderá ser recuperado."
-  * **Botão Primário:** "Excluir Registro"
-  * **Botão Secundário:** "Cancelar"
+* **Preservação de Histórico de Versões / Testes:**
+  * **Aviso de Sistema:** "O historico de versões e testes vinculados é preservado para manter a integridade do rastreamento. As alterações devem ser feitas gerando novas versões do prompt."
 
 * **Limpar Todos os Dados / Reset:**
   * **Título Modal:** "Limpar Armazenamento Local"
-  * **Texto de Consequência:** "Você está prestes a apagar todos os prompts, testes e pipelines salvos no seu navegador. Certifique-se de ter feito uma cópia de segurança (exportação JSON) antes de prosseguir."
+  * **Texto de Consequência:** "Você está prestes a apagar todos os prompts, testes e pipelines salvos no seu navegador. Certifique-se de ter feito uma cópia de segurança (exportação JSON) antes da exclusão."
   * **Botão Primário:** "Apagar Tudo"
   * **Botão Secundário:** "Cancelar"
 
