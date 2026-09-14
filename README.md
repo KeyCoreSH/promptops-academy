@@ -4,6 +4,14 @@ Atividade Real 02 da KeyCore Tech Hub para transformar prompts dispersos em um c
 
 > Tecnologia que devolve tempo.
 
+> **Status do desafio: encerrado**
+>
+> Esta atividade já foi concluída e está fechada para o ciclo atual da KeyCore Tech Hub. Ela permanece pública como registro educacional e referência de portfólio.
+>
+> Mesmo encerrado, recomendamos fortemente realizar este desafio: ele é uma excelente oportunidade para praticar engenharia de prompt, contexto, qualidade e colaboração via Git — competências que podem gerar um ótimo projeto de portfólio no futuro.
+>
+> Outros desafios técnicos da KeyCore: [Desafio 01](https://github.com/KeyCoreSH/desafio-01) · [Desafio 02](https://github.com/KeyCoreSH/desafio-02).
+
 ## Problema
 
 Um prompt sem contexto, evidência, histórico de teste ou relação com a próxima etapa obriga a equipe a recomeçar decisões. Este projeto propõe um fluxo rastreável para encontrar, entender, testar, registrar e continuar.
