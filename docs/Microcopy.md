@@ -148,7 +148,8 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
 * **Duplicidade exata de prompt:** "Já existe um prompt com este texto. Abra o registro existente para revisar ou criar uma nova versão."
 * **Categoria ou Subcategoria não selecionada:** "Selecione uma categoria e subcategoria válidas para classificar o prompt."
 * **Status Inválido ou Divergente:** "Selecione um status válido (`Rascunho`, `Em revisão`, `Publicado`, `Arquivado`)."
-* **Campos obrigatórios pendentes:** "Preencha todos os campos obrigatórios antes de salvar o registro."
+* **Maturidade Inválida:** "Selecione um nível de maturidade válido (`Experimental`, `Em validação`, `Validado`)."
+* **Campos obrigatórios pendentes:** "Preencha todos os campos obrigatórios do schema canônico antes de salvar o registro."
 * **Falha de identificação por meio de busca:** "Nenhum prompt combina com esta busca. Ajuste o termo ou limpe os filtros."
 
 ---
@@ -210,13 +211,19 @@ Os termos a seguir devem ser preservados para uma facilidade sobre cada função
   * **Botão Primário (Ação Destrutiva):** "Excluir Definitivamente"
   * **Botão Secundário:** "Cancelar"
 
+* **Excluir Registro de Teste:**
+  * **Título Modal:** "Excluir Registro de Teste"
+  * **Texto de Consequência:** "Tem certeza de que deseja remover este teste do histórico? Esta ação não pode ser desfeita e afetará as estatísticas da versão."
+  * **Botão Primário (Ação Destrutiva):** "Excluir Teste"
+  * **Botão Secundário:** "Cancelar"
+
 * **Preservação de Histórico de Versões / Testes:**
   * **Aviso de Sistema:** "O historico de versões e testes vinculados é preservado para manter a integridade do rastreamento. As alterações devem ser feitas gerando novas versões do prompt."
 
 * **Limpar Todos os Dados / Reset:**
   * **Título Modal:** "Limpar Armazenamento Local"
   * **Texto de Consequência:** "Você está prestes a apagar todos os prompts, testes e pipelines salvos no seu navegador. Certifique-se de ter feito uma cópia de segurança (exportação JSON) antes da exclusão."
-  * **Botão Primário:** "Apagar Tudo"
+  * **Botão Primário (Ação Destrutiva):** "Apagar Tudo"
   * **Botão Secundário:** "Cancelar"
 
 ---
