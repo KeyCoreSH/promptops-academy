@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>PromptOps Academy</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/catalog.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#catalogo">Ir para o catálogo</a>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#inicio" aria-label="PromptOps Academy, início">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span><strong>PromptOps</strong><small>Academy</small></span>
+      </a>
+
+      <nav class="side-nav">
+        <a class="nav-link active" href="#inicio"><span aria-hidden="true">⌂</span>Início</a>
+        <a class="nav-link" href="#catalogo"><span aria-hidden="true">☷</span>Catálogo</a>
+        <span class="nav-link muted"><span aria-hidden="true">⌘</span>Testes</span>
+        <span class="nav-link muted"><span aria-hidden="true">◇</span>Relações</span>
+        <span class="nav-link muted"><span aria-hidden="true">♧</span>Equipe</span>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span class="nav-link muted"><span aria-hidden="true">⚙</span>Configurações</span>
+        <p>Organize contextos.<br>Registre testes.<br>Reutilize resultados.</p>
+      </div>
+    </aside>
+
+    <div class="page">
+      <header class="topbar">
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <label class="search-field global-search">
+          <span aria-hidden="true">⌕</span>
+          <span class="sr-only">Busca global</span>
+          <input id="global-search" type="search" placeholder="Buscar prompts por título, objetivo ou tag..." data-integration="levi-search">
+        </label>
+        <div class="profile" aria-label="Perfil da equipe"><span class="avatar" aria-hidden="true">♙</span><strong>Equipe</strong><span aria-hidden="true">⌄</span></div>
+      </header>
+
+      <main class="content">
+        <section class="welcome" id="inicio" aria-labelledby="welcome-title">
+          <div class="welcome-copy">
+            <span class="spark" aria-hidden="true">✦</span>
+            <div>
+              <h1 id="welcome-title">Bem-vindo ao<br>PromptOps Academy!</h1>
+              <p>Encontre, teste e melhore prompts de IA<br>de forma simples e organizada.</p>
+            </div>
+          </div>
+
+          <div class="stats" aria-label="Indicadores do catálogo">
+            <article class="stat"><span class="stat-icon purple" aria-hidden="true">⬡</span><strong id="prompt-count">0</strong><small>Prompts</small></article>
+            <article class="stat"><span class="stat-icon green" aria-hidden="true">▱</span><strong id="category-count">0</strong><small>categorias</small></article>
+            <article class="stat"><span class="stat-icon purple" aria-hidden="true">☷</span><strong id="pipeline-count">0</strong><small>pipelines</small></article>
+          </div>
+
+          <p class="welcome-note">Boas ideias<br>começam com<br>bons prompts.<i></i></p>
+        </section>
+
+        <section class="catalog" id="catalogo" aria-labelledby="catalog-title">
+          <div class="toolbar" aria-label="Controles do catálogo">
+            <label class="search-field catalog-search">
+              <span aria-hidden="true">⌕</span>
+              <span class="sr-only">Buscar prompts</span>
+              <input id="catalog-search" type="search" placeholder="Buscar prompts..." data-integration="levi-search">
+            </label>
+            <label><span class="sr-only">Categoria</span><select id="category-filter" data-integration="levi-filter"><option value="">Categorias</option></select></label>
+            <label><span class="sr-only">Subcategoria</span><select id="subcategory-filter" data-integration="levi-filter"><option value="">Subcategorias</option></select></label>
+            <label><span class="sr-only">Status</span><select id="status-filter" data-integration="levi-filter"><option value="">Status</option></select></label>
+            <label><span class="sr-only">Maturidade</span><select id="maturity-filter" data-integration="levi-filter"><option value="">Maturidade</option></select></label>
+            <button class="new-prompt" type="button" data-integration="cadastro" disabled title="Disponível após a integração do cadastro"><span aria-hidden="true">＋</span>Novo Prompt</button>
+          </div>
+
+          <div class="catalog-heading">
+            <h2 id="catalog-title">Prompts</h2>
+            <span id="result-count" aria-live="polite">0 resultados</span>
+          </div>
+
+          <div id="catalog-state" class="catalog-state" role="status">
+            <strong>Nenhum prompt cadastrado ainda.</strong>
+            <span>Os cards aparecerão aqui quando os dados do catálogo forem conectados.</span>
+          </div>
+
+          <div id="prompt-grid" class="prompt-grid" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
