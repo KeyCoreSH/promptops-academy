@@ -258,4 +258,90 @@
   });
 
   window.dispatchEvent(new CustomEvent('promptops:catalog-ready'));
+
+  // Carregamento automático e integração com o DOM
+  if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+      let currentData = null;
+
+      function getFilters() {
+        const searchInput = document.querySelector('#catalog-search') || document.querySelector('#global-search');
+        const catSelect = document.querySelector('#category-filter');
+        const subSelect = document.querySelector('#subcategory-filter');
+        const statusSelect = document.querySelector('#status-filter');
+        const matSelect = document.querySelector('#maturity-filter');
+
+        return {
+          busca: searchInput ? searchInput.value : '',
+          categoryId: catSelect ? catSelect.value : '',
+          subcategoryId: subSelect ? subSelect.value : '',
+          status: statusSelect ? statusSelect.value : '',
+          maturity: matSelect ? matSelect.value : ''
+        };
+      }
+
+      function update() {
+        if (currentData) {
+          render(currentData, getFilters());
+        }
+      }
+
+      function populateCategories(data) {
+        const catSelect = document.querySelector('#category-filter');
+        const statusSelect = document.querySelector('#status-filter');
+        const matSelect = document.querySelector('#maturity-filter');
+
+        if (catSelect && Array.isArray(data.categories) && catSelect.options.length <= 1) {
+          catSelect.innerHTML = '<option value="">Todas as categorias</option>';
+          data.categories.forEach(cat => {
+            const opt = document.createElement('option');
+            opt.value = cat.id;
+            opt.textContent = cat.name || cat.id;
+            catSelect.appendChild(opt);
+          });
+        }
+
+        if (statusSelect && statusSelect.options.length <= 1) {
+          statusSelect.innerHTML = `
+            <option value="">Todos os status</option>
+            <option value="rascunho">Rascunho</option>
+            <option value="em_revisao">Em revisão</option>
+            <option value="publicado">Publicado</option>
+            <option value="arquivado">Arquivado</option>
+          `;
+        }
+
+        if (matSelect && matSelect.options.length <= 1) {
+          matSelect.innerHTML = `
+            <option value="">Todas as maturidades</option>
+            <option value="experimental">Experimental</option>
+            <option value="em_validacao">Em validação</option>
+            <option value="validado">Validado</option>
+          `;
+        }
+      }
+
+      const inputs = document.querySelectorAll('#catalog-search, #global-search, #category-filter, #subcategory-filter, #status-filter, #maturity-filter');
+      inputs.forEach(input => {
+        input.addEventListener('input', update);
+        input.addEventListener('change', update);
+      });
+
+      showState('loading');
+      fetch('data/prompts.json')
+        .then(res => {
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          return res.json();
+        })
+        .then(data => {
+          currentData = data;
+          populateCategories(data);
+          render(currentData, getFilters());
+        })
+        .catch(err => {
+          console.error('Erro ao carregar prompts.json:', err);
+          showState('error', 'Não foi possível carregar os dados de data/prompts.json.');
+        });
+    });
+  }
 })(globalThis);
