@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "prompts": [
+  {
+    "id": "OP-01",
+    "title": "Mapeamento de processo",
+    "categoryId": "operacoes",
+    "subcategoryId": "Diagnóstico operacional",
+    "tags": [
+      "processos",
+      "diagnóstico",
+      "operações"
+    ],
+    "problem": "Identificar gargalos, etapas desnecessárias e pontos de retrabalho em um processo operacional.",
+    "objective": "Mapear o processo atual de forma estruturada e identificar oportunidades de melhoria.",
+    "responsible": "KeyCore",
+    "status": "rascunho",
+    "maturity": "experimental",
+    "currentVersionId": "OP-01-v1"
+  }
+],
+  "versions": [
+  {
+    "id": "OP-01-v1",
+    "promptId": "OP-01",
+    "number": 1,
+    "text": "Analise o processo descrito pelo usuário e identifique suas principais etapas, gargalos, retrabalhos e oportunidades de melhoria. Organize a análise de forma objetiva e indique quais pontos devem ser priorizados.",
+    "context": "O processo deve ser analisado com base nas informações fornecidas pelo usuário, considerando etapas, responsáveis, gargalos e possíveis retrabalhos.",
+    "restrictions": "Não invente informações que não foram fornecidas. Quando faltarem dados importantes, indique quais informações são necessárias para completar a análise.",
+    "format": "Apresente as etapas identificadas, os gargalos encontrados, os possíveis retrabalhos e as oportunidades de melhoria em seções organizadas.",
+    "qualityCriteria": "A análise deve ser clara, objetiva, baseada nas informações fornecidas e capaz de destacar problemas e oportunidades de melhoria relevantes.",
+    "nextAction": "Validar a análise com o responsável pelo processo e selecionar os pontos que devem ser investigados primeiro.",
+    "author": "KeyCore",
+    "createdAt": "2026-09-23"
+  }
+],
+  "tests": [],
+  "relations": [],
+  "pipelines": [],
+  "categories": [
+  {
+    "id": "operacoes",
+    "name": "Operações e Processos",
+    "subcategories": [
+      "Diagnóstico operacional",
+      "Planejamento e melhoria"
+    ]
+  },
+  {
+    "id": "conteudo",
+    "name": "Conteúdo e Comunicação",
+    "subcategories": [
+      "Estratégia editorial",
+      "Produção e revisão"
+    ]
+  },
+  {
+    "id": "produto",
+    "name": "Produto e Desenvolvimento",
+    "subcategories": [
+      "Registro de defeitos",
+      "Validação e testes"
+    ]
+  },
+  {
+    "id": "dados",
+    "name": "Dados e Análise",
+    "subcategories": [
+      "Qualidade de dados",
+      "Análise exploratória"
+    ]
+  },
+  {
+    "id": "seguranca",
+    "name": "Segurança e Governança",
+    "subcategories": [
+      "Privacidade",
+      "Confiabilidade da informação"
+    ]
+  },
+  {
+    "id": "aprendizado",
+    "name": "Aprendizado e Pesquisa",
+    "subcategories": [
+      "Pesquisa orientada",
+      "Estudo aplicado"
+    ]
+  }
+]
+}
