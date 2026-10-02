@@ -1,0 +1,756 @@
+{
+  "schemaVersion": 1,
+  "prompts": [
+    {
+      "id": "OP-01",
+      "title": "Organizar relato operacional",
+      "categoryId": "operacoes",
+      "subcategoryId": "Diagnóstico operacional",
+      "tags": [
+        "operacoes",
+        "op"
+      ],
+      "problem": "Necessidade de organizar relato operacional.",
+      "objective": "Processo, atores, entradas, saídas e lacunas.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "OP-01-v1"
+    },
+    {
+      "id": "OP-02",
+      "title": "Identificar gargalos com evidência",
+      "categoryId": "operacoes",
+      "subcategoryId": "Diagnóstico operacional",
+      "tags": [
+        "operacoes",
+        "op"
+      ],
+      "problem": "Necessidade de identificar gargalos com evidência.",
+      "objective": "Gargalos ligados a trechos do relato.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "OP-02-v1"
+    },
+    {
+      "id": "OP-03",
+      "title": "Priorizar gargalos sem inventar métricas",
+      "categoryId": "operacoes",
+      "subcategoryId": "Diagnóstico operacional",
+      "tags": [
+        "operacoes",
+        "op"
+      ],
+      "problem": "Necessidade de priorizar gargalos sem inventar métricas.",
+      "objective": "Prioridade preliminar e justificativas com limites.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "OP-03-v1"
+    },
+    {
+      "id": "OP-04",
+      "title": "Criar perguntas de validação",
+      "categoryId": "operacoes",
+      "subcategoryId": "Planejamento e melhoria",
+      "tags": [
+        "operacoes",
+        "op"
+      ],
+      "problem": "Necessidade de criar perguntas de validação.",
+      "objective": "Perguntas ligadas às lacunas que impedem decidir.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "OP-04-v1"
+    },
+    {
+      "id": "OP-05",
+      "title": "Estruturar plano de melhoria",
+      "categoryId": "operacoes",
+      "subcategoryId": "Planejamento e melhoria",
+      "tags": [
+        "operacoes",
+        "op"
+      ],
+      "problem": "Necessidade de estruturar plano de melhoria.",
+      "objective": "Ações, dependências, responsáveis propostos e verificações.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "OP-05-v1"
+    },
+    {
+      "id": "OP-06",
+      "title": "Revisar plano e riscos",
+      "categoryId": "operacoes",
+      "subcategoryId": "Planejamento e melhoria",
+      "tags": [
+        "operacoes",
+        "op"
+      ],
+      "problem": "Necessidade de revisar plano e riscos.",
+      "objective": "Inconsistências, riscos e pontos a confirmar.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "OP-06-v1"
+    },
+    {
+      "id": "CO-01",
+      "title": "Recortar uma dor para conteúdo",
+      "categoryId": "conteudo",
+      "subcategoryId": "Estratégia editorial",
+      "tags": [
+        "conteudo",
+        "co"
+      ],
+      "problem": "Necessidade de recortar uma dor para conteúdo.",
+      "objective": "Problema concreto e mensagem central.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "CO-01-v1"
+    },
+    {
+      "id": "CO-02",
+      "title": "Definir público e dúvidas",
+      "categoryId": "conteudo",
+      "subcategoryId": "Estratégia editorial",
+      "tags": [
+        "conteudo",
+        "co"
+      ],
+      "problem": "Necessidade de definir público e dúvidas.",
+      "objective": "Público, contexto e dúvidas, sem fingir pesquisa.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "CO-02-v1"
+    },
+    {
+      "id": "CO-03",
+      "title": "Montar briefing educativo",
+      "categoryId": "conteudo",
+      "subcategoryId": "Estratégia editorial",
+      "tags": [
+        "conteudo",
+        "co"
+      ],
+      "problem": "Necessidade de montar briefing educativo.",
+      "objective": "Objetivo, formato, exemplo e referências disponíveis.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "CO-03-v1"
+    },
+    {
+      "id": "CO-04",
+      "title": "Redigir conteúdo com aplicação prática",
+      "categoryId": "conteudo",
+      "subcategoryId": "Produção e revisão",
+      "tags": [
+        "conteudo",
+        "co"
+      ],
+      "problem": "Necessidade de redigir conteúdo com aplicação prática.",
+      "objective": "Rascunho claro, com exemplo e limites.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "CO-04-v1"
+    },
+    {
+      "id": "CO-05",
+      "title": "Revisar o tom de voz KeyCore",
+      "categoryId": "conteudo",
+      "subcategoryId": "Produção e revisão",
+      "tags": [
+        "conteudo",
+        "co"
+      ],
+      "problem": "Necessidade de revisar o tom de voz keycore.",
+      "objective": "Texto direto, humano e sem promessas infundadas.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "CO-05-v1"
+    },
+    {
+      "id": "CO-06",
+      "title": "Conferir antes de publicar",
+      "categoryId": "conteudo",
+      "subcategoryId": "Produção e revisão",
+      "tags": [
+        "conteudo",
+        "co"
+      ],
+      "problem": "Necessidade de conferir antes de publicar.",
+      "objective": "Checklist de clareza, fontes, privacidade e ação final.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "CO-06-v1"
+    },
+    {
+      "id": "QA-01",
+      "title": "Estruturar relato de falha",
+      "categoryId": "produto",
+      "subcategoryId": "Registro de defeitos",
+      "tags": [
+        "produto",
+        "qa"
+      ],
+      "problem": "Necessidade de estruturar relato de falha.",
+      "objective": "Esperado, observado, ambiente e lacunas.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "QA-01-v1"
+    },
+    {
+      "id": "QA-02",
+      "title": "Descrever passos de reprodução",
+      "categoryId": "produto",
+      "subcategoryId": "Registro de defeitos",
+      "tags": [
+        "produto",
+        "qa"
+      ],
+      "problem": "Necessidade de descrever passos de reprodução.",
+      "objective": "Pré-condições, dados e passos repetíveis.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "QA-02-v1"
+    },
+    {
+      "id": "QA-03",
+      "title": "Classificar severidade com justificativa",
+      "categoryId": "produto",
+      "subcategoryId": "Registro de defeitos",
+      "tags": [
+        "produto",
+        "qa"
+      ],
+      "problem": "Necessidade de classificar severidade com justificativa.",
+      "objective": "Impacto, abrangência e motivo da classificação.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "QA-03-v1"
+    },
+    {
+      "id": "QA-04",
+      "title": "Criar caso de teste verificável",
+      "categoryId": "produto",
+      "subcategoryId": "Validação e testes",
+      "tags": [
+        "produto",
+        "qa"
+      ],
+      "problem": "Necessidade de criar caso de teste verificável.",
+      "objective": "Ação, entrada e resultado esperado.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "QA-04-v1"
+    },
+    {
+      "id": "QA-05",
+      "title": "Preparar registro de bug",
+      "categoryId": "produto",
+      "subcategoryId": "Validação e testes",
+      "tags": [
+        "produto",
+        "qa"
+      ],
+      "problem": "Necessidade de preparar registro de bug.",
+      "objective": "Título, contexto, passos e evidências permitidas.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "QA-05-v1"
+    },
+    {
+      "id": "QA-06",
+      "title": "Planejar validação de correção",
+      "categoryId": "produto",
+      "subcategoryId": "Validação e testes",
+      "tags": [
+        "produto",
+        "qa"
+      ],
+      "problem": "Necessidade de planejar validação de correção.",
+      "objective": "Reteste e verificação de comportamentos relacionados.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "QA-06-v1"
+    },
+    {
+      "id": "DA-01",
+      "title": "Mapear problemas em uma base fictícia",
+      "categoryId": "dados",
+      "subcategoryId": "Qualidade de dados",
+      "tags": [
+        "dados",
+        "da"
+      ],
+      "problem": "Necessidade de mapear problemas em uma base fictícia.",
+      "objective": "Ausências, inconsistências e perguntas, sem inventar correções.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "DA-01-v1"
+    },
+    {
+      "id": "DA-02",
+      "title": "Descrever padrões sem forçar conclusões",
+      "categoryId": "dados",
+      "subcategoryId": "Análise exploratória",
+      "tags": [
+        "dados",
+        "da"
+      ],
+      "problem": "Necessidade de descrever padrões sem forçar conclusões.",
+      "objective": "Padrões sustentados pela amostra e limites da leitura.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "DA-02-v1"
+    },
+    {
+      "id": "SG-01",
+      "title": "Revisar riscos antes de compartilhar",
+      "categoryId": "seguranca",
+      "subcategoryId": "Privacidade",
+      "tags": [
+        "seguranca",
+        "sg"
+      ],
+      "problem": "Necessidade de revisar riscos antes de compartilhar.",
+      "objective": "Checklist de informações que não devem entrar nos exemplos.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "SG-01-v1"
+    },
+    {
+      "id": "SG-02",
+      "title": "Auditar alegações e suas fontes",
+      "categoryId": "seguranca",
+      "subcategoryId": "Confiabilidade da informação",
+      "tags": [
+        "seguranca",
+        "sg"
+      ],
+      "problem": "Necessidade de auditar alegações e suas fontes.",
+      "objective": "Alegações, evidências e pendências de verificação.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "SG-02-v1"
+    },
+    {
+      "id": "AP-01",
+      "title": "Planejar pesquisa a partir de uma dúvida",
+      "categoryId": "aprendizado",
+      "subcategoryId": "Pesquisa orientada",
+      "tags": [
+        "aprendizado",
+        "ap"
+      ],
+      "problem": "Necessidade de planejar pesquisa a partir de uma dúvida.",
+      "objective": "Perguntas, fontes a consultar e critérios de síntese.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "AP-01-v1"
+    },
+    {
+      "id": "AP-02",
+      "title": "Criar exercícios a partir de um conceito",
+      "categoryId": "aprendizado",
+      "subcategoryId": "Estudo aplicado",
+      "tags": [
+        "aprendizado",
+        "ap"
+      ],
+      "problem": "Necessidade de criar exercícios a partir de um conceito.",
+      "objective": "Exercício, aplicação concreta e critério de autoavaliação.",
+      "responsible": "KeyCore",
+      "status": "publicado",
+      "maturity": "validado",
+      "currentVersionId": "AP-02-v1"
+    }
+  ],
+  "versions": [
+    {
+      "id": "OP-01-v1",
+      "promptId": "OP-01",
+      "number": 1,
+      "text": "Papel: Você é um especialista em operacoes.\nObjetivo: Processo, atores, entradas, saídas e lacunas.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de operacoes, focado em Diagnóstico operacional.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "OP-02-v1",
+      "promptId": "OP-02",
+      "number": 1,
+      "text": "Papel: Você é um especialista em operacoes.\nObjetivo: Gargalos ligados a trechos do relato.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de operacoes, focado em Diagnóstico operacional.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "OP-03-v1",
+      "promptId": "OP-03",
+      "number": 1,
+      "text": "Papel: Você é um especialista em operacoes.\nObjetivo: Prioridade preliminar e justificativas com limites.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de operacoes, focado em Diagnóstico operacional.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "OP-04-v1",
+      "promptId": "OP-04",
+      "number": 1,
+      "text": "Papel: Você é um especialista em operacoes.\nObjetivo: Perguntas ligadas às lacunas que impedem decidir.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de operacoes, focado em Planejamento e melhoria.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "OP-05-v1",
+      "promptId": "OP-05",
+      "number": 1,
+      "text": "Papel: Você é um especialista em operacoes.\nObjetivo: Ações, dependências, responsáveis propostos e verificações.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de operacoes, focado em Planejamento e melhoria.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "OP-06-v1",
+      "promptId": "OP-06",
+      "number": 1,
+      "text": "Papel: Você é um especialista em operacoes.\nObjetivo: Inconsistências, riscos e pontos a confirmar.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de operacoes, focado em Planejamento e melhoria.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "CO-01-v1",
+      "promptId": "CO-01",
+      "number": 1,
+      "text": "Papel: Você é um especialista em conteudo.\nObjetivo: Problema concreto e mensagem central.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de conteudo, focado em Estratégia editorial.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "CO-02-v1",
+      "promptId": "CO-02",
+      "number": 1,
+      "text": "Papel: Você é um especialista em conteudo.\nObjetivo: Público, contexto e dúvidas, sem fingir pesquisa.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de conteudo, focado em Estratégia editorial.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "CO-03-v1",
+      "promptId": "CO-03",
+      "number": 1,
+      "text": "Papel: Você é um especialista em conteudo.\nObjetivo: Objetivo, formato, exemplo e referências disponíveis.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de conteudo, focado em Estratégia editorial.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "CO-04-v1",
+      "promptId": "CO-04",
+      "number": 1,
+      "text": "Papel: Você é um especialista em conteudo.\nObjetivo: Rascunho claro, com exemplo e limites.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de conteudo, focado em Produção e revisão.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "CO-05-v1",
+      "promptId": "CO-05",
+      "number": 1,
+      "text": "Papel: Você é um especialista em conteudo.\nObjetivo: Texto direto, humano e sem promessas infundadas.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de conteudo, focado em Produção e revisão.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "CO-06-v1",
+      "promptId": "CO-06",
+      "number": 1,
+      "text": "Papel: Você é um especialista em conteudo.\nObjetivo: Checklist de clareza, fontes, privacidade e ação final.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de conteudo, focado em Produção e revisão.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "QA-01-v1",
+      "promptId": "QA-01",
+      "number": 1,
+      "text": "Papel: Você é um especialista em produto.\nObjetivo: Esperado, observado, ambiente e lacunas.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de produto, focado em Registro de defeitos.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "QA-02-v1",
+      "promptId": "QA-02",
+      "number": 1,
+      "text": "Papel: Você é um especialista em produto.\nObjetivo: Pré-condições, dados e passos repetíveis.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de produto, focado em Registro de defeitos.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "QA-03-v1",
+      "promptId": "QA-03",
+      "number": 1,
+      "text": "Papel: Você é um especialista em produto.\nObjetivo: Impacto, abrangência e motivo da classificação.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de produto, focado em Registro de defeitos.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "QA-04-v1",
+      "promptId": "QA-04",
+      "number": 1,
+      "text": "Papel: Você é um especialista em produto.\nObjetivo: Ação, entrada e resultado esperado.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de produto, focado em Validação e testes.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "QA-05-v1",
+      "promptId": "QA-05",
+      "number": 1,
+      "text": "Papel: Você é um especialista em produto.\nObjetivo: Título, contexto, passos e evidências permitidas.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de produto, focado em Validação e testes.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "QA-06-v1",
+      "promptId": "QA-06",
+      "number": 1,
+      "text": "Papel: Você é um especialista em produto.\nObjetivo: Reteste e verificação de comportamentos relacionados.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de produto, focado em Validação e testes.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "DA-01-v1",
+      "promptId": "DA-01",
+      "number": 1,
+      "text": "Papel: Você é um especialista em dados.\nObjetivo: Ausências, inconsistências e perguntas, sem inventar correções.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de dados, focado em Qualidade de dados.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "DA-02-v1",
+      "promptId": "DA-02",
+      "number": 1,
+      "text": "Papel: Você é um especialista em dados.\nObjetivo: Padrões sustentados pela amostra e limites da leitura.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de dados, focado em Análise exploratória.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "SG-01-v1",
+      "promptId": "SG-01",
+      "number": 1,
+      "text": "Papel: Você é um especialista em seguranca.\nObjetivo: Checklist de informações que não devem entrar nos exemplos.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de seguranca, focado em Privacidade.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "SG-02-v1",
+      "promptId": "SG-02",
+      "number": 1,
+      "text": "Papel: Você é um especialista em seguranca.\nObjetivo: Alegações, evidências e pendências de verificação.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de seguranca, focado em Confiabilidade da informação.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "AP-01-v1",
+      "promptId": "AP-01",
+      "number": 1,
+      "text": "Papel: Você é um especialista em aprendizado.\nObjetivo: Perguntas, fontes a consultar e critérios de síntese.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de aprendizado, focado em Pesquisa orientada.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    },
+    {
+      "id": "AP-02-v1",
+      "promptId": "AP-02",
+      "number": 1,
+      "text": "Papel: Você é um especialista em aprendizado.\nObjetivo: Exercício, aplicação concreta e critério de autoavaliação.\nPor favor, aja de acordo com este objetivo.",
+      "context": "O contexto é a área de aprendizado, focado em Estudo aplicado.",
+      "restrictions": "Não invente fatos. Siga estritamente as entradas fornecidas. Não assuma informações ausentes.",
+      "format": "Formate a resposta de forma clara, utilizando listas ou tabelas quando apropriado.",
+      "qualityCriteria": "A resposta deve ser acionável e fundamentada nos dados fornecidos.",
+      "nextAction": "Encaminhar o resultado para a próxima etapa do processo.",
+      "author": "KeyCore",
+      "createdAt": "2026-10-02"
+    }
+  ],
+  "tests": [],
+  "relations": [],
+  "pipelines": [],
+  "categories": [
+    {
+      "id": "operacoes",
+      "name": "Operações e Processos",
+      "subcategories": [
+        "Diagnóstico operacional",
+        "Planejamento e melhoria"
+      ]
+    },
+    {
+      "id": "conteudo",
+      "name": "Conteúdo e Comunicação",
+      "subcategories": [
+        "Estratégia editorial",
+        "Produção e revisão"
+      ]
+    },
+    {
+      "id": "produto",
+      "name": "Produto e Desenvolvimento",
+      "subcategories": [
+        "Registro de defeitos",
+        "Validação e testes"
+      ]
+    },
+    {
+      "id": "dados",
+      "name": "Dados e Análise",
+      "subcategories": [
+        "Qualidade de dados",
+        "Análise exploratória"
+      ]
+    },
+    {
+      "id": "seguranca",
+      "name": "Segurança e Governança",
+      "subcategories": [
+        "Privacidade",
+        "Confiabilidade da informação"
+      ]
+    },
+    {
+      "id": "aprendizado",
+      "name": "Aprendizado e Pesquisa",
+      "subcategories": [
+        "Pesquisa orientada",
+        "Estudo aplicado"
+      ]
+    }
+  ]
+}
