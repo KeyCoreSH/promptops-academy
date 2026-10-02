@@ -236,7 +236,7 @@
 
     var link = document.createElement("a");
     link.href =
-      "public/details.html?id=" + encodeURIComponent(prompt.id);
+      "prompt.html?id=" + encodeURIComponent(prompt.id);
     link.textContent = limparMarkdown(prompt.title);
     heading.appendChild(link);
 
@@ -625,6 +625,22 @@
 
     if (maturityFilter) {
       maturityFilter.addEventListener("change", updateCatalog);
+    }
+
+    var clearFiltersBtn = document.querySelector("#clear-filters");
+    if (clearFiltersBtn) {
+      clearFiltersBtn.addEventListener("click", function () {
+        if (catalogSearch) catalogSearch.value = "";
+        if (globalSearch) globalSearch.value = "";
+        if (categoryFilter) categoryFilter.value = "";
+        if (subcategoryFilter) subcategoryFilter.value = "";
+        if (statusFilter) statusFilter.value = "";
+        if (maturityFilter) maturityFilter.value = "";
+        if (currentData) {
+          populateSubcategories(currentData, "");
+        }
+        updateCatalog();
+      });
     }
 
     // --------------------------------------------------------

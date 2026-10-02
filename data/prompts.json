@@ -14,7 +14,7 @@
       "objective": "Processo, atores, entradas, saídas e lacunas.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "OP-01-v1"
     },
     {
@@ -30,7 +30,7 @@
       "objective": "Gargalos ligados a trechos do relato.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "OP-02-v1"
     },
     {
@@ -46,7 +46,7 @@
       "objective": "Prioridade preliminar e justificativas com limites.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "OP-03-v1"
     },
     {
@@ -62,7 +62,7 @@
       "objective": "Perguntas ligadas às lacunas que impedem decidir.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "OP-04-v1"
     },
     {
@@ -78,7 +78,7 @@
       "objective": "Ações, dependências, responsáveis propostos e verificações.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "OP-05-v1"
     },
     {
@@ -94,7 +94,7 @@
       "objective": "Inconsistências, riscos e pontos a confirmar.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "OP-06-v1"
     },
     {
@@ -110,7 +110,7 @@
       "objective": "Problema concreto e mensagem central.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "CO-01-v1"
     },
     {
@@ -126,7 +126,7 @@
       "objective": "Público, contexto e dúvidas, sem fingir pesquisa.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "CO-02-v1"
     },
     {
@@ -142,7 +142,7 @@
       "objective": "Objetivo, formato, exemplo e referências disponíveis.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "CO-03-v1"
     },
     {
@@ -158,7 +158,7 @@
       "objective": "Rascunho claro, com exemplo e limites.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "CO-04-v1"
     },
     {
@@ -174,7 +174,7 @@
       "objective": "Texto direto, humano e sem promessas infundadas.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "CO-05-v1"
     },
     {
@@ -190,7 +190,7 @@
       "objective": "Checklist de clareza, fontes, privacidade e ação final.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "CO-06-v1"
     },
     {
@@ -206,7 +206,7 @@
       "objective": "Esperado, observado, ambiente e lacunas.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "QA-01-v1"
     },
     {
@@ -222,7 +222,7 @@
       "objective": "Pré-condições, dados e passos repetíveis.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "QA-02-v1"
     },
     {
@@ -238,7 +238,7 @@
       "objective": "Impacto, abrangência e motivo da classificação.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "QA-03-v1"
     },
     {
@@ -254,7 +254,7 @@
       "objective": "Ação, entrada e resultado esperado.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "QA-04-v1"
     },
     {
@@ -270,7 +270,7 @@
       "objective": "Título, contexto, passos e evidências permitidas.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "QA-05-v1"
     },
     {
@@ -286,7 +286,7 @@
       "objective": "Reteste e verificação de comportamentos relacionados.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "QA-06-v1"
     },
     {
@@ -302,7 +302,7 @@
       "objective": "Ausências, inconsistências e perguntas, sem inventar correções.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "DA-01-v1"
     },
     {
@@ -318,7 +318,7 @@
       "objective": "Padrões sustentados pela amostra e limites da leitura.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "DA-02-v1"
     },
     {
@@ -334,7 +334,7 @@
       "objective": "Checklist de informações que não devem entrar nos exemplos.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "SG-01-v1"
     },
     {
@@ -350,7 +350,7 @@
       "objective": "Alegações, evidências e pendências de verificação.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "SG-02-v1"
     },
     {
@@ -366,7 +366,7 @@
       "objective": "Perguntas, fontes a consultar e critérios de síntese.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "AP-01-v1"
     },
     {
@@ -382,7 +382,7 @@
       "objective": "Exercício, aplicação concreta e critério de autoavaliação.",
       "responsible": "KeyCore",
       "status": "publicado",
-      "maturity": "validado no contexto declarado",
+      "maturity": "validado",
       "currentVersionId": "AP-02-v1"
     }
   ],
