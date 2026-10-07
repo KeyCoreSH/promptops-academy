@@ -460,6 +460,7 @@
     console.log("PromptOps: JavaScript carregado.");
 
     var currentData = null;
+    var originalPrompts = null;
 
     // --------------------------------------------------------
     // ELEMENTOS
@@ -514,6 +515,17 @@
       console.log("PromptOps: atualizando catálogo", filters);
       render(currentData, filters);
     }
+
+    function refreshData() {
+      if (!currentData || !originalPrompts) return;
+      var persisted = (global.PromptOpsStorage && typeof global.PromptOpsStorage.getConsolidatedPrompts === "function") 
+        ? global.PromptOpsStorage.getConsolidatedPrompts(originalPrompts) 
+        : originalPrompts.slice();
+      currentData.prompts = persisted;
+      updateCatalog();
+    }
+    
+    catalogAPI.refreshData = refreshData;
 
     // --------------------------------------------------------
     // POPULA FILTROS (categorias, subcategorias, status, maturidade)
@@ -697,8 +709,10 @@
         );
 
         currentData = data;
-        populateCategories(data);
-        render(currentData, getFilters());
+        originalPrompts = data.prompts.slice();
+        
+        refreshData();
+        populateCategories(currentData);
       })
       .catch(function (error) {
         console.error(
@@ -717,11 +731,14 @@
   // EXPORTAÇÃO
   // ============================================================
 
-  global.PromptOpsCatalog = Object.freeze({
+  var catalogAPI = {
     render: render,
     showState: showState,
     createCard: createCard,
     filtrarPrompts: filtrarPrompts,
     limparFiltros: limparFiltros,
-  });
+    refreshData: function() {}
+  };
+
+  global.PromptOpsCatalog = catalogAPI;
 })(globalThis);
