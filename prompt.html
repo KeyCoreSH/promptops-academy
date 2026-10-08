@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>Detalhe do Prompt - PromptOps Academy</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <script src="js/navigation.js" defer></script>
+  <script src="js/storage.js" defer></script>
+  <script src="js/prompt-detail.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#prompt-detail-content">Ir para o conteúdo principal</a>
+
+  <div class="app-shell">
+    <!-- Sidebar de Navegação Principal -->
+    <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="index.html#inicio" aria-label="PromptOps Academy, início">
+        <span class="brand-mark" aria-hidden="true">✦</span>
+        <span><strong>PromptOps</strong><small>Academy</small></span>
+      </a>
+
+      <nav class="side-nav">
+        <a class="nav-link" href="index.html#inicio"><span aria-hidden="true">⌂</span>Início</a>
+        <a class="nav-link active" href="index.html#catalogo"><span aria-hidden="true">☷</span>Catálogo</a>
+        <a class="nav-link" href="public/laboratorio-de-prompts.html"><span aria-hidden="true">🧪</span>Laboratório</a>
+        <span class="nav-link muted"><span aria-hidden="true">⌘</span>Testes</span>
+        <span class="nav-link muted"><span aria-hidden="true">◇</span>Relações</span>
+        <span class="nav-link muted"><span aria-hidden="true">♧</span>Equipe</span>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span class="nav-link muted"><span aria-hidden="true">⚙</span>Configurações</span>
+        <p>Organize contextos.<br>Registre testes.<br>Reutilize resultados.</p>
+      </div>
+    </aside>
+
+    <!-- Área de Conteúdo da Página -->
+    <div class="page">
+      <header class="topbar">
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-controls="sidebar" aria-expanded="false">☰</button>
+        
+        <!-- Breadcrumbs de Navegação -->
+        <nav class="nav-breadcrumbs" aria-label="Caminho de navegação">
+          <a href="index.html#inicio">Início</a>
+          <span class="separator" aria-hidden="true">/</span>
+          <a href="index.html#catalogo">Catálogo</a>
+          <span class="separator" aria-hidden="true">/</span>
+          <span class="current" id="breadcrumb-prompt-title">Detalhe</span>
+        </nav>
+
+        <div class="profile" aria-label="Perfil da equipe">
+          <span class="avatar" aria-hidden="true">♙</span>
+          <strong>Equipe</strong>
+          <span aria-hidden="true">⌄</span>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="prompt-detail-container">
+          
+          <!-- Estado de Carregamento -->
+          <div id="detail-loading" class="catalog-state" role="status">
+            <p>Carregando informações do prompt...</p>
+          </div>
+
+          <!-- Estado de Erro -->
+          <div id="detail-error" class="state-error-box" role="alert" hidden>
+            <div class="state-error-icon" aria-hidden="true">⚠</div>
+            <h2>Prompt não encontrado</h2>
+            <p id="error-message">O prompt solicitado não existe ou não pôde ser carregado.</p>
+            <div style="margin-top: 20px;">
+              <a href="index.html#catalogo" class="btn btn-primary">← Voltar ao Catálogo</a>
+            </div>
+          </div>
+
+          <!-- Conteúdo do Detalhe do Prompt -->
+          <article id="prompt-detail-content" class="prompt-detail-card" hidden>
+            
+            <header>
+              <div class="prompt-header-badges">
+                <span class="badge badge-id" id="prompt-badge-id">ID</span>
+                <span class="badge badge-category" id="prompt-badge-category">Categoria</span>
+                <span class="badge badge-subcategory" id="prompt-badge-subcategory">Subcategoria</span>
+                <span class="badge badge-status" id="prompt-badge-status">Status</span>
+                <span class="badge badge-maturity" id="prompt-badge-maturity">Maturidade</span>
+              </div>
+              <h1 class="prompt-detail-title" id="prompt-detail-title">Título do Prompt</h1>
+            </header>
+
+            <section class="prompt-section">
+              <h2 class="prompt-section-title">Objetivo</h2>
+              <p class="prompt-text-block" id="prompt-objective"></p>
+            </section>
+
+            <section class="prompt-section">
+              <h2 class="prompt-section-title">Problema Resolvido</h2>
+              <p class="prompt-text-block" id="prompt-problem"></p>
+            </section>
+
+            <section class="prompt-section">
+              <h2 class="prompt-section-title">Instrução / Conteúdo do Prompt</h2>
+              <div class="prompt-code-wrapper">
+                <div class="prompt-code-header">
+                  <span class="prompt-code-label" id="prompt-version-info">Versão 1</span>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span id="copy-feedback" class="feedback-toast" hidden>✓ Copiado!</span>
+                    <button type="button" class="btn btn-secondary btn-icon" id="btn-copy-prompt" title="Copiar texto do prompt">
+                      📋 Copiar
+                    </button>
+                  </div>
+                </div>
+                <pre class="prompt-code-content" id="prompt-text-content"></pre>
+              </div>
+            </section>
+
+            <section class="prompt-section">
+              <h2 class="prompt-section-title">Palavras-chave e Tags</h2>
+              <div class="prompt-tags-list" id="prompt-tags-list"></div>
+            </section>
+
+            <!-- Barra de Ações do Fluxo -->
+            <footer class="prompt-actions-bar">
+              <div class="action-group-primary">
+                <button type="button" class="btn btn-lab" id="btn-test-in-lab">
+                  🧪 Testar no Laboratório
+                </button>
+                <a href="index.html#catalogo" class="btn btn-secondary">
+                  ← Voltar ao Catálogo
+                </a>
+              </div>
+              <div class="action-group-secondary">
+                <a href="index.html#inicio" class="btn btn-secondary">
+                  🏠 Ir para o Início
+                </a>
+              </div>
+            </footer>
+
+          </article>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

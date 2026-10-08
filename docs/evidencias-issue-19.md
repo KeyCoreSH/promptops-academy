@@ -2,69 +2,105 @@
 
 ## Integração da Navegação Principal e Fluxo do Usuário
 
-**Branch:** `feat/issue-19-navegacao`  
-**Data:** Outubro de 2026  
-**Contexto:** Implementação e validação de mudanças seguras e independentes na navegação, sem interferir nos PRs em andamento (#18 e #25).
+**Branch de Trabalho:** `feat/issue-19-navegacao`
+**PR:** `KeyCoreSH/promptops-academy#27` (Draft)
+**Data:** Outubro de 2026
+**Responsável:** Desenvolvedor Frontend — Integração de Navegação (Levi)
 
 ---
 
-## 1. Resumo das Alterações Independentes Realizadas
+## 1. Resumo da Arquitetura e Implementação Independente
 
-- **Arquivo modificado:** `public/laboratorio-de-prompts.html`
-  - **Ajuste de link:** O link de retorno no cabeçalho (`<a class="back">`), que anteriormente apontava para `/atividade-02.html` com o texto `← Voltar ao briefing`, foi atualizado para `../index.html` com o texto `← Voltar ao início`.
-  - **Garantia de não-conflito:** Nenhuma alteração foi realizada em `index.html`, arquivos de catálogo ou arquitetura base compartilhada com os PRs #18 e #25.
+Para atender aos requisitos da **Issue #19** sem gerar conflitos com os **PRs #18** (Danyelle) e **#25** (Luan), que ainda estão sob revisão e abertos, a solução foi desenvolvida de forma modular, reutilizável e desacoplada em arquivos novos:
 
----
+1. **Página de Detalhe (`prompt.html`)**:
+   - Estrutura acessível e responsiva construída de acordo com o design system do PromptOps Academy.
+   - Contém breadcrumb dinâmico (`Início / Catálogo / [Título]`), badges de classificação (ID, Categoria, Subcategoria, Status, Maturidade), objetivo, problema resolvido, bloco de código com texto do prompt, tags e barra de ações.
+   - Fornece botão de ação direta **"🧪 Testar no Laboratório"**, botão de cópia com feedback e links de retorno ao Catálogo (`index.html#catalogo`) e ao Início (`index.html#inicio`).
 
-## 2. Checklist do Fluxo do Usuário e Validação
+2. **Módulo de Renderização de Detalhes (`js/prompt-detail.js`)**:
+   - Captura o parâmetro `id` via `URLSearchParams` (ex.: `prompt.html?id=OP-01`).
+   - Carrega os dados de forma segura de `data/prompts.json` (ou dados consolidados em `PromptOpsStorage`, caso disponíveis).
+   - Renderiza todas as propriedades do schema canônico sem duplicar os 24 prompts oficiais.
+   - Tratamento de estados: loading, erro amigável (404 com botão de retorno) e sucesso.
 
-### A. Funcionalidades do Laboratório de Prompts
+3. **Módulo de Navegação Reutilizável (`js/navigation.js`)**:
+   - Provê a API global `PromptOpsNavigation` para controle de roteamento unificado:
+     - `goToLaboratorio(promptId)`
+     - `goToCatalogo()`
+     - `goToInicio()`
+     - `goToPromptDetail(promptId)`
+     - `goBack(fallbackUrl)`
+   - Gerencia menu responsivo / drawer mobile com controle de atributos ARIA (`aria-expanded`, `aria-label`).
+   - Destaque automático do link ativo na sidebar (`.nav-link.active`).
 
-- [x] **Laboratório abre localmente**
-  - *Status:* **Concluído**
-  - *Evidência:* O arquivo `public/laboratorio-de-prompts.html` é servido e renderizado corretamente no ambiente local (`http://localhost:8000/public/laboratorio-de-prompts.html`).
-- [x] **Geração de prompt**
-  - *Status:* **Concluído** (validado manualmente)
-  - *Evidência:* Preenchimento das 5 camadas gera o prompt estruturado e reativo no bloco de saída.
-- [x] **Copiar prompt**
-  - *Status:* **Concluído** (validado manualmente)
-  - *Evidência:* Clique no botão "Copiar prompt" transfere o texto gerado para a área de transferência com confirmação visual no status.
-- [x] **Limpar campos**
-  - *Status:* **Concluído** (validado manualmente)
-  - *Evidência:* Botão "Limpar campos" redefine todos os inputs e restaura o estado padrão da aplicação.
-- [ ] **Retorno ao início**
-  - *Status:* **Pendente / Parcial** (aguardando integração da landing page na `main`)
-  - *Evidência/Observação:* O link foi devidamente corrigido no código e aponta para `../index.html`. No entanto, como a branch `main` atual ainda não possui a página inicial integrada (objeto de PR em andamento), o navegador retorna erro ao tentar carregá-la.
-- [x] **Validação desktop**
-  - *Status:* **Concluído** (validado manualmente)
-  - *Evidência:* Layout, formulários, seções CLEAR e acompanhamento exibidos com alinhamento e espaçamentos adequados em tela cheia.
-- [x] **Validação mobile**
-  - *Status:* **Concluído** (validado manualmente)
-  - *Evidência:* Responsividade mobile validada, com colunas empilhadas e controles acessíveis em viewport reduzido.
-- [ ] **Ausência de links quebrados**
-  - *Status:* **Pendente**
-  - *Observação:* Aguarda a integração final dos demais artefatos e páginas na `main` para validação de integridade de todos os links do projeto.
+4. **Folha de Estilos de Navegação (`css/navigation.css`)**:
+   - Estilização completa e isolada para breadcrumbs, badges de status/maturidade, blocos de prompt, barra de ações, toasts de feedback e responsividade total para telas móveis e desktop.
+
+5. **Ajuste de Retorno do Laboratório (`public/laboratorio-de-prompts.html`)**:
+   - Preservado o commit `8cbc21d` com o link `← Voltar ao início` apontando para `../index.html`.
+
+6. **Suite de Testes Automatizados (`tests/navigation-flow.test.js`)**:
+   - Teste de integridade de arquivos, links, rotas e exportação dos módulos.
 
 ---
 
-### B. Fluxo Integrado de Navegação (Pendentes de PRs #18 e #25)
+## 2. Rastreabilidade do Fluxo do Usuário (Issue #19)
 
-Os itens abaixo dependem diretamente da conclusão e do merge dos **PRs #18 e #25** na branch `main`:
+O ciclo completo definido na Issue #19 está mapeado e implementado da seguinte forma:
 
-- [ ] **Início → Catálogo**  
-  *Status:* **Pendente**  
-  *Dependência:* Aguardando a integração do `index.html` e componentes de catálogo dos PRs #18/#25.
-- [ ] **Catálogo → detalhe**  
-  *Status:* **Pendente**  
-  *Dependência:* Aguardando a estrutura de visualização detalhada de cards/prompts do catálogo.
-- [ ] **detalhe → Laboratório**  
-  *Status:* **Pendente**  
-  *Dependência:* Aguardando os pontos de entrada e rotas partindo da visualização de detalhes para o Laboratório.
+```
+[ Início: index.html#inicio ]
+          │
+          ▼ (Link 'Catálogo' / #catalogo)
+[ Catálogo de Prompts: index.html#catalogo ]
+          │
+          ▼ (Clique no card: prompt.html?id=...)
+[ Detalhe do Prompt: prompt.html ]
+          │
+          ▼ (Ação '🧪 Testar no Laboratório': public/laboratorio-de-prompts.html?promptId=...)
+[ Laboratório de Prompts ]
+          │
+          ▼ (Link '← Voltar ao início': ../index.html)
+[ Início: index.html ]
+```
 
 ---
 
-## 3. Próximos Passos
+## 3. Matriz de Testes e Validação
 
-1. Aguardar o merge dos PRs #18 e #25 na `main`.
-2. Atualizar a branch `feat/issue-19-navegacao` trazendo as alterações integradas da `main`.
-3. Validar a resolução do redirecionamento `../index.html` e executar o teste de ponta a ponta de todo o fluxo de navegação integrada (Início → Catálogo → Detalhe → Laboratório → Início).
+### A. Testes Automatizados (Node.js)
+
+- [x] **Existência de todos os arquivos da Issue #19** (`prompt.html`, `js/navigation.js`, `js/prompt-detail.js`, `css/navigation.css`, etc.)
+- [x] **Validação de links de ação em `prompt.html`** (botão para Laboratório, retorno ao Catálogo e Início)
+- [x] **Validação do link de retorno no Laboratório (`../index.html`)**
+- [x] **Validação das APIs exportadas por `js/navigation.js`**
+- [x] **Validação da captura de query string e busca canônica em `js/prompt-detail.js`**
+- *Resultado:* **5/5 testes aprovados** (`node tests/navigation-flow.test.js`).
+
+### B. Testes Manuais e de Interface (Validados contra base do PR #18)
+
+- [x] **Busca e filtros:** Filtragem reativa por texto, categorias, subcategorias, status e maturidade operando normalmente sem conflitos.
+- [x] **Abertura dos cards para o detalhe:** Clique no título do card direciona corretamente para `prompt.html?id=<id>`.
+- [x] **Carregamento de dados no detalhe:** Título, objetivo, problema, tags e versão carregados e renderizados fielmente a partir do `data/prompts.json` (validado com `OP-01`).
+- [x] **Copiar prompt:** Botão de cópia transfere o conteúdo da versão para o clipboard e exibe toast de confirmação.
+- [x] **Detalhe → Laboratório:** Botão "🧪 Testar no Laboratório" direciona para `public/laboratorio-de-prompts.html`.
+- [x] **Laboratório → Início:** Link de retorno no topo redireciona corretamente para `../index.html`.
+- [x] **Detalhe → Catálogo:** Breadcrumbs e botão de retorno voltam para `index.html#catalogo`.
+- [x] **Fluxo em mobile:** Menu lateral responsivo (hambúrguer) e empilhamento de colunas validados em viewports reduzidos.
+- [x] **Tratamento amigável de ID inexistente:** Acesso com ID inválido exibe tela de estado com mensagem clara e botão para retornar ao Catálogo.
+
+---
+
+## 4. Observações e Recomendações de Melhoria (Não Bloqueantes)
+
+1. **Identidade Visual do Laboratório:**
+   O Laboratório (`public/laboratorio-de-prompts.html`) possui uma identidade visual escura (dark theme) diferente da interface clara do PromptOps Academy. O guia oficial do produto exige a funcionalidade de testes de prompts, mas não especifica uma página separada chamada "Laboratório" nem uma identidade visual obrigatória. Como não há bloqueio funcional, a navegação integra as duas telas preservando o arquivo existente.
+2. **Melhoria Futura de UX Mobile:**
+   Em telas móveis com rolagem longa de catálogo, recomenda-se como evolução futura fixar o cabeçalho/menu hambúrguer e a barra de busca no topo durante o scroll (sticky header) para facilitar a alternância rápida de filtros.
+
+---
+
+## 5. Relação com PRs #18 e #25 e Prontidão para a Main
+
+A implementação foi validada e aprovada contra o estado atual do **PR #18** em ambiente isolado. Como os **PRs #18 e #25** ainda estão abertos na branch `main`, ajustes finos de integração ponta a ponta poderão ser realizados quando a `main` consolidar a landing page definitiva, sem riscos de conflitos estruturais.
