@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/storage.js" defer></script>
   <script src="js/catalog.js" defer></script>
+  <script src="js/registration.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#catalogo">Ir para o catálogo</a>
@@ -75,7 +76,7 @@
             <label><span class="sr-only">Status</span><select id="status-filter" data-integration="levi-filter"><option value="">Status</option></select></label>
             <label><span class="sr-only">Maturidade</span><select id="maturity-filter" data-integration="levi-filter"><option value="">Maturidade</option></select></label>
             <button id="clear-filters" type="button" class="clear-filters-btn">Limpar filtros</button>
-            <button class="new-prompt" type="button" data-integration="cadastro" disabled title="Disponível após a integração do cadastro"><span aria-hidden="true">＋</span>Novo Prompt</button>
+            <button class="new-prompt" type="button" id="new-prompt" data-integration="cadastro"><span aria-hidden="true">＋</span>Novo Prompt</button>
           </div>
 
           <div class="catalog-heading">
@@ -88,6 +89,110 @@
           <div id="prompt-grid" class="prompt-grid" aria-live="polite"></div>
         </section>
       </main>
+    </div>
+  </div>
+
+  <div id="modal" class="modal" hidden>
+    <div class="modal-dialog">
+      <header class="modal-header">
+        <h2>Novo Prompt</h2>
+        <button type="button" id="modal-close" aria-label="Fechar modal" class="close-btn">×</button>
+      </header>
+      <form id="prompt-form" class="modal-form">
+        <p id="form-message" class="form-message error" hidden></p>
+
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input type="text" id="title" name="title" required minlength="8">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="categoryId">Categoria</label>
+            <select id="categoryId" name="categoryId" required></select>
+          </div>
+          <div class="form-group">
+            <label for="subcategoryId">Subcategoria</label>
+            <select id="subcategoryId" name="subcategoryId" required></select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="tags">Tags (separadas por vírgula)</label>
+          <input type="text" id="tags" name="tags">
+        </div>
+
+        <div class="form-group">
+          <label for="problem">Problema</label>
+          <textarea id="problem" name="problem" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="objective">Objetivo</label>
+          <textarea id="objective" name="objective" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="responsible">Responsável</label>
+            <input type="text" id="responsible" name="responsible" required>
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+              <option value="rascunho">Rascunho</option>
+              <option value="em_revisao">Em revisão</option>
+              <option value="publicado">Publicado</option>
+              <option value="arquivado">Arquivado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="maturity">Maturidade</label>
+            <select id="maturity" name="maturity" required>
+              <option value="experimental">Experimental</option>
+              <option value="em_validacao">Em validação</option>
+              <option value="validado">Validado</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="text">Texto do Prompt</label>
+          <textarea id="text" name="text" required minlength="80" rows="5"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="context">Contexto</label>
+          <textarea id="context" name="context"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="restrictions">Restrições</label>
+            <textarea id="restrictions" name="restrictions"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="format">Formato</label>
+            <textarea id="format" name="format"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="qualityCriteria">Critérios de Qualidade</label>
+            <textarea id="qualityCriteria" name="qualityCriteria"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="nextAction">Próxima Ação</label>
+            <textarea id="nextAction" name="nextAction"></textarea>
+          </div>
+        </div>
+
+        <footer class="modal-footer">
+          <button type="button" id="modal-cancel" class="btn secondary">Cancelar</button>
+          <button type="submit" class="btn primary">Salvar Prompt</button>
+        </footer>
+      </form>
     </div>
   </div>
 </body>
