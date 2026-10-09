@@ -82,3 +82,21 @@ No VS Code, também funciona a extensão Live Server: clique com o botão direit
 ## Fluxo de navegação
 
 Início → Catálogo → Detalhe do prompt (`prompt.html?id=...`) → Laboratório → Início.
+## Privacidade e dados
+
+O repositório é público. Não versionar registros individuais reais, credenciais, tokens, cookies ou dados sensíveis. O ambiente operacional autenticado mantém os registros dos estagiários fora deste repositório.
+
+## Governança de branches
+
+- `main` é protegida;
+- contribuições devem seguir por Pull Request;
+- somente **@rogerin** pode aprovar e liberar alterações para `main`.
+
+## Documentação
+
+- [Guia de produto e execução](docs/guia-produto-e-execucao.pdf)
+- [Briefing da Atividade Real 02](docs/atividade-real-02-briefing.html)
+
+## Licença
+
+Material educacional e operacional da KeyCore Tech Hub. Uso conforme orientação da organização.
