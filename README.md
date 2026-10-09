@@ -52,26 +52,33 @@ O laboratório demonstra visualmente qual trecho do prompt atende a cada letra.
 ## Estrutura
 
 ```text
-public/    interface do laboratório individual
-/docs/     guia oficial e briefing da atividade
-/data/     dados de desenvolvimento; não publicar registros reais
+index.html                          Início e catálogo (único ponto de entrada)
+prompt.html                         Detalhe do prompt (?id=...)
+css/styles.css                      Estilos compartilhados
+js/                                 Scripts (catalog.js, script.js, storage.js)
+data/prompts.json                   Dados dos prompts; não publicar registros reais
+public/laboratorio-de-prompts.html  Interface do laboratório individual
+docs/                               Guia oficial, briefing e documentação técnica
 ```
 
-## Privacidade e dados
+## Como executar localmente
 
-O repositório é público. Não versionar registros individuais reais, credenciais, tokens, cookies ou dados sensíveis. O ambiente operacional autenticado mantém os registros dos estagiários fora deste repositório.
+Os dados são carregados com `fetch`, então abrir o HTML direto no navegador (`file://`) não funciona. Rode um servidor local na raiz do projeto:
 
-## Governança de branches
+```bash
+python3 -m http.server 8000
+```
 
-- `main` é protegida;
-- contribuições devem seguir por Pull Request;
-- somente **@rogerin** pode aprovar e liberar alterações para `main`.
+Abra `http://localhost:8000`. O laboratório fica em `http://localhost:8000/public/laboratorio-de-prompts.html`.
 
-## Documentação
+No VS Code, também funciona a extensão Live Server: clique com o botão direito em `index.html` e escolha "Open with Live Server".
 
-- [Guia de produto e execução](docs/guia-produto-e-execucao.pdf)
-- [Briefing da Atividade Real 02](docs/atividade-real-02-briefing.html)
+## Regra de caminhos relativos
 
-## Licença
+- Páginas na raiz (`index.html`, `prompt.html`) usam `./css/...`, `./js/...` e `./data/...`.
+- Páginas em subpastas (`public/`) usam `../css/...`, `../js/...`, `../data/...` e voltam ao início com `../index.html`.
+- Não criar cópias de `index.html`, `prompt.html` nem de CSS/JS compartilhados: toda tela nova reaproveita os arquivos existentes.
 
-Material educacional e operacional da KeyCore Tech Hub. Uso conforme orientação da organização.
+## Fluxo de navegação
+
+Início → Catálogo → Detalhe do prompt (`prompt.html?id=...`) → Laboratório → Início.
