@@ -21,6 +21,51 @@ Um prompt sem contexto, evidência, histórico de teste ou relação com a próx
 
 **Encontrar → Entender → Copiar e testar → Registrar → Continuar**
 
+## Estado atual do fluxo navegável
+
+A Issue #19 foi validada ponta a ponta no estado atual de integração com as PRs #18 e #25.
+
+### O que funciona
+
+- Página inicial e catálogo carregam normalmente.
+- Os 24 prompts são exibidos no catálogo.
+- Busca por título, objetivo e tags funciona.
+- Filtros de catálogo funcionam corretamente.
+- Os cards abrem o detalhe correspondente em `prompt.html?id=...`.
+- O detalhe carrega os dados reais do prompt.
+- A ação de copiar o prompt funciona.
+- O fluxo Detalhe → Laboratório funciona.
+- O retorno Laboratório → Início funciona.
+- O retorno Detalhe → Catálogo funciona.
+- IDs inexistentes exibem uma mensagem amigável sem quebrar a página.
+- O fluxo foi validado em desktop e mobile.
+- Os testes automatizados da navegação passaram: 5/5.
+
+### Pendências de integração
+
+- A PR #27 permanece em Draft até a consolidação definitiva das PRs #18 e #25 na `main`.
+- A PR #18 também possui um `prompt.html`; a PR #27 contém a versão funcional da tela de detalhe, então esse arquivo pode exigir reconciliação durante a integração final.
+- Caso a estrutura das PRs dependentes seja alterada antes do merge, o fluxo deverá ser validado novamente.
+
+### Como validar o fluxo
+
+Com o projeto executando em servidor local:
+
+1. Abra `index.html`.
+2. Confira o carregamento do catálogo com os 24 prompts.
+3. Teste busca e filtros.
+4. Abra um card e confirme a URL `prompt.html?id=...`.
+5. Verifique os dados exibidos no detalhe.
+6. Teste a ação de copiar.
+7. Acesse o Laboratório pela tela de detalhe.
+8. Retorne do Laboratório para o Início.
+9. Retorne do detalhe para o Catálogo.
+10. Teste um ID inexistente, por exemplo `prompt.html?id=NAO-EXISTE`.
+11. Repita o fluxo em viewport mobile.
+
+Resultado da última validação manual: **12/12 testes aprovados**.
+
+
 ## Exercício individual
 
 O laboratório guiado organiza a construção de um prompt em cinco camadas:
