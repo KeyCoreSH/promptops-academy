@@ -1,0 +1,25 @@
+name: Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate JSON
+        run: node -e "JSON.parse(require('fs').readFileSync('data/prompts.json', 'utf8'))"
+      - name: Validate JavaScript syntax
+        run: find js -name '*.js' -print0 | xargs -0 -n1 node --check
+      - name: Run tests
+        run: node --test tests/*.test.js
