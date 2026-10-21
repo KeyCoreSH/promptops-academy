@@ -83,29 +83,18 @@
       return prefix + '-' + Date.now() + '-' + Math.random().toString(16).slice(2);
     }
 
-    function validatePrompt(formData) {
-      const title = formData.get('title').trim();
-      const text = formData.get('text').trim();
-      const categoryId = formData.get('categoryId');
-      const subcategoryId = formData.get('subcategoryId');
-      
-      if (title.length < 8) return 'O título precisa ter pelo menos 8 caracteres.';
-      if (text.length < 80) return 'O texto do prompt precisa ter pelo menos 80 caracteres.';
-      if (!categoryId || !subcategoryId) return 'Selecione uma categoria e subcategoria válidas.';
-      
-      return '';
-    }
-
     form.addEventListener('submit', event => {
       event.preventDefault();
       
       const formData = new FormData(form);
-      const error = validatePrompt(formData);
       
-      if (error) {
-        formMessage.textContent = error;
-        formMessage.hidden = false;
-        return;
+      if (global.Validation && typeof global.Validation.validatePrompt === 'function') {
+        const validationResult = global.Validation.validatePrompt(formData);
+        if (!validationResult.isValid) {
+          formMessage.textContent = validationResult.errorMessage;
+          formMessage.hidden = false;
+          return;
+        }
       }
       
       const promptId = makeId('prompt');
