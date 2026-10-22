@@ -90,7 +90,10 @@
       if (global.PromptValidation && typeof global.PromptValidation.validatePrompt === 'function') {
         const validationResult = global.PromptValidation.validatePrompt(formData);
         if (!validationResult.valid) {
-          formMessage.textContent = Array.isArray(validationResult.errors) ? validationResult.errors.join(', ') : 'Erro de validação';
+          const errorMessages = Array.isArray(validationResult.errors)
+            ? validationResult.errors.map(err => typeof err === 'object' && err !== null ? (err.message || JSON.stringify(err)) : err)
+            : ['Erro de validação'];
+          formMessage.textContent = errorMessages.join(', ');
           formMessage.hidden = false;
           return;
         }
