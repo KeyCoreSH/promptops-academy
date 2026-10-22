@@ -16,7 +16,6 @@
 
     let categoriesData = [];
 
-    // Busca categorias do JSON para popular selects
     fetch('./data/prompts.json')
       .then(response => response.json())
       .then(data => {
@@ -88,10 +87,10 @@
       
       const formData = new FormData(form);
       
-      if (global.Validation && typeof global.Validation.validatePrompt === 'function') {
-        const validationResult = global.Validation.validatePrompt(formData);
-        if (!validationResult.isValid) {
-          formMessage.textContent = validationResult.errorMessage;
+      if (global.PromptValidation && typeof global.PromptValidation.validatePrompt === 'function') {
+        const validationResult = global.PromptValidation.validatePrompt(formData);
+        if (!validationResult.valid) {
+          formMessage.textContent = Array.isArray(validationResult.errors) ? validationResult.errors.join(', ') : 'Erro de validação';
           formMessage.hidden = false;
           return;
         }
@@ -103,7 +102,6 @@
       const tagsString = formData.get('tags') || '';
       const tagsArray = tagsString.split(',').map(tag => tag.trim()).filter(Boolean);
 
-      // Adaptação dos dados ao formato utilizado em data/prompts.json
       const promptData = {
         id: promptId,
         title: formData.get('title').trim(),
@@ -131,7 +129,6 @@
         }
       };
       
-      // Chamada para camada de persistência
       if (global.PromptOpsStorage && typeof global.PromptOpsStorage.saveNewPrompt === 'function') {
         try {
           global.PromptOpsStorage.saveNewPrompt(promptData);
