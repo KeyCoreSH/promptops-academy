@@ -191,6 +191,11 @@
       // Configuração dos Botões de Ação
       var copyBtn = document.getElementById('btn-copy-prompt');
       var feedbackToast = document.getElementById('copy-feedback');
+      var copyTimeout;
+
+      if (feedbackToast) {
+        feedbackToast.hidden = true;
+      }
 
       if (copyBtn) {
         copyBtn.addEventListener('click', function () {
@@ -214,8 +219,12 @@
         document.body.appendChild(textarea);
         textarea.select();
         try {
-          document.execCommand('copy');
-          showCopySuccess();
+          var successful = document.execCommand('copy');
+          if (successful) {
+            showCopySuccess();
+          } else {
+            alert('Não foi possível copiar automaticamente.');
+          }
         } catch (err) {
           alert('Não foi possível copiar automaticamente.');
         }
@@ -225,7 +234,10 @@
       function showCopySuccess() {
         if (!feedbackToast) return;
         feedbackToast.hidden = false;
-        setTimeout(function () {
+        if (copyTimeout) {
+          clearTimeout(copyTimeout);
+        }
+        copyTimeout = setTimeout(function () {
           feedbackToast.hidden = true;
         }, 3000);
       }
