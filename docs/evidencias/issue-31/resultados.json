@@ -1,0 +1,69 @@
+{
+  "browser": "156.0.8078.47",
+  "method": "Playwright Chrome headless; local project files served by route.fulfill on http://promptops.test (loopback network blocked)",
+  "results": [
+    {
+      "viewport": "320x568",
+      "modal": "PASS",
+      "menu": "PASS (touch/link/Escape/resize/detail)",
+      "sticky": "PASS",
+      "validation": "PASS",
+      "persistence": "PASS",
+      "pageErrors": []
+    },
+    {
+      "viewport": "360x740",
+      "modal": "PASS",
+      "menu": "PASS (touch/link/Escape/resize/detail)",
+      "sticky": "PASS",
+      "validation": "PASS",
+      "persistence": "PASS",
+      "pageErrors": []
+    },
+    {
+      "viewport": "412x915",
+      "modal": "PASS",
+      "menu": "PASS (touch/link/Escape/resize/detail)",
+      "sticky": "PASS",
+      "validation": "PASS",
+      "persistence": "PASS",
+      "pageErrors": []
+    },
+    {
+      "viewport": "700x800",
+      "modal": "PASS",
+      "menu": "PASS (touch/link/Escape/resize/detail)",
+      "sticky": "PASS",
+      "validation": "PASS",
+      "persistence": "PASS",
+      "pageErrors": []
+    },
+    {
+      "viewport": "701x800",
+      "modal": "PASS",
+      "menu": "desktop",
+      "sticky": "PASS",
+      "validation": "PASS",
+      "persistence": "PASS",
+      "pageErrors": []
+    },
+    {
+      "viewport": "1440x900",
+      "modal": "PASS",
+      "menu": "desktop",
+      "sticky": "PASS",
+      "validation": "PASS",
+      "persistence": "PASS",
+      "pageErrors": []
+    },
+    {
+      "viewport": "915x412",
+      "modal": "PASS",
+      "menu": "desktop",
+      "sticky": "PASS",
+      "validation": "PASS",
+      "persistence": "PASS",
+      "pageErrors": []
+    }
+  ]
+}

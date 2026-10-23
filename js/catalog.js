@@ -663,6 +663,31 @@
     var sidebar = document.querySelector("#sidebar");
 
     if (menuToggle && sidebar) {
+      function closeMobileMenu() {
+        sidebar.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menu");
+      }
+
+      document.addEventListener("pointerdown", function (event) {
+        if (window.innerWidth <= 700 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target)) {
+          closeMobileMenu();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && sidebar.classList.contains("open")) {
+          closeMobileMenu();
+          menuToggle.focus();
+        }
+      });
+
+      window.addEventListener("resize", function () {
+        if (window.innerWidth > 700) closeMobileMenu();
+      });
+
       menuToggle.addEventListener("click", function () {
         var open = sidebar.classList.toggle("open");
 
@@ -682,9 +707,7 @@
           event.target.closest("a") &&
           window.innerWidth <= 700
         ) {
-          sidebar.classList.remove("open");
-          menuToggle.setAttribute("aria-expanded", "false");
-          menuToggle.setAttribute("aria-label", "Abrir menu");
+          closeMobileMenu();
         }
       });
     }

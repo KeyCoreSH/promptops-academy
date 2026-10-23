@@ -32,6 +32,31 @@
 
       if (!menuToggle || !sidebar) return;
 
+      function closeMobileMenu() {
+        sidebar.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Abrir menu de navegação');
+      }
+
+      document.addEventListener('pointerdown', function (event) {
+        if (window.innerWidth <= 700 &&
+            !sidebar.contains(event.target) &&
+            !menuToggle.contains(event.target)) {
+          closeMobileMenu();
+        }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && sidebar.classList.contains('open')) {
+          closeMobileMenu();
+          menuToggle.focus();
+        }
+      });
+
+      window.addEventListener('resize', function () {
+        if (window.innerWidth > 700) closeMobileMenu();
+      });
+
       menuToggle.addEventListener('click', function () {
         var isOpen = sidebar.classList.toggle('open');
         menuToggle.setAttribute('aria-expanded', String(isOpen));
@@ -41,10 +66,8 @@
       // Fechar menu mobile ao clicar em qualquer link da sidebar
       sidebar.addEventListener('click', function (event) {
         var link = event.target.closest('a');
-        if (link && window.innerWidth <= 768) {
-          sidebar.classList.remove('open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          menuToggle.setAttribute('aria-label', 'Abrir menu de navegação');
+        if (link && window.innerWidth <= 700) {
+          closeMobileMenu();
         }
       });
     },

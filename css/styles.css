@@ -169,7 +169,8 @@ a.nav-link:hover {
 }
 
 .topbar {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 4;
   display: flex;
   align-items: center;
@@ -672,6 +673,8 @@ a.nav-link:hover {
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
+  padding: 16px;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
@@ -686,9 +689,9 @@ a.nav-link:hover {
 .modal-dialog {
   background: #fff;
   border-radius: 8px;
-  width: 90%;
+  width: 100%;
   max-width: 600px;
-  max-height: 90vh;
+  max-height: 100%;
   overflow-y: auto;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   display: flex;
@@ -696,6 +699,7 @@ a.nav-link:hover {
 }
 
 .modal-header {
+  flex-shrink: 0;
   padding: 16px 24px;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
@@ -717,6 +721,8 @@ a.nav-link:hover {
 }
 
 .modal-form {
+  flex-shrink: 0;
+  min-width: 0;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -724,6 +730,7 @@ a.nav-link:hover {
 }
 
 .form-group {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -735,6 +742,9 @@ a.nav-link:hover {
 }
 
 .form-group input, .form-group select, .form-group textarea {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -743,11 +753,12 @@ a.nav-link:hover {
 
 .form-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 
 .modal-footer {
+  flex-wrap: wrap;
   padding-top: 16px;
   border-top: 1px solid #e0e0e0;
   display: flex;
@@ -777,4 +788,19 @@ a.nav-link:hover {
   color: #d32f2f;
   font-weight: bold;
   margin-bottom: 8px;
+}
+
+@media (max-width: 700px) {
+  .modal-header,
+  .modal-form {
+    padding: 16px;
+  }
+
+  .form-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .modal-footer .btn {
+    flex: 1 1 120px;
+  }
 }
