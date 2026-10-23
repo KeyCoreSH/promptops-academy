@@ -87,8 +87,20 @@
       
       const formData = new FormData(form);
       
+      const candidate = {
+        title: formData.get('title'),
+        content: formData.get('text'),
+        category: formData.get('categoryId'),
+        subcategory: formData.get('subcategoryId')
+      };
+
+      let existingPrompts = [];
+      if (global.PromptOpsStorage && typeof global.PromptOpsStorage.getAllPrompts === 'function') {
+        existingPrompts = global.PromptOpsStorage.getAllPrompts();
+      }
+      
       if (global.PromptValidation && typeof global.PromptValidation.validatePrompt === 'function') {
-        const validationResult = global.PromptValidation.validatePrompt(formData);
+        const validationResult = global.PromptValidation.validatePrompt(candidate, existingPrompts);
         if (!validationResult.valid) {
           const errorMessages = Array.isArray(validationResult.errors)
             ? validationResult.errors.map(err => typeof err === 'object' && err !== null ? (err.message || JSON.stringify(err)) : err)
