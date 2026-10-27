@@ -85,6 +85,15 @@
     form.addEventListener('submit', event => {
       event.preventDefault();
       
+      if (!global.PromptValidation || typeof global.PromptValidation.validatePrompt !== 'function') {
+        if (formMessage) {
+          formMessage.textContent = 'Erro de segurança: Sistema de validação indisponível.';
+          formMessage.className = 'form-message error';
+          formMessage.hidden = false;
+        }
+        return;
+      }
+
       const formData = new FormData(form);
       
       const candidate = {
@@ -99,16 +108,15 @@
         existingPrompts = global.PromptOpsStorage.getAllPrompts();
       }
       
-      if (global.PromptValidation && typeof global.PromptValidation.validatePrompt === 'function') {
-        const validationResult = global.PromptValidation.validatePrompt(candidate, existingPrompts);
-        if (!validationResult.valid) {
-          const errorMessages = Array.isArray(validationResult.errors)
-            ? validationResult.errors.map(err => typeof err === 'object' && err !== null ? (err.message || JSON.stringify(err)) : err)
-            : ['Erro de validação'];
-          formMessage.textContent = errorMessages.join(', ');
-          formMessage.hidden = false;
-          return;
-        }
+      const validationResult = global.PromptValidation.validatePrompt(candidate, existingPrompts);
+      if (!validationResult.valid) {
+        const errorMessages = Array.isArray(validationResult.errors)
+          ? validationResult.errors.map(err => typeof err === 'object' && err !== null ? (err.message || JSON.stringify(err)) : err)
+          : ['Erro de validação'];
+        formMessage.textContent = errorMessages.join(', ');
+        formMessage.className = 'form-message error';
+        formMessage.hidden = false;
+        return;
       }
       
       const promptId = makeId('prompt');
