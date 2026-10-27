@@ -85,7 +85,8 @@
     form.addEventListener('submit', event => {
       event.preventDefault();
       
-      if (!global.PromptValidation || typeof global.PromptValidation.validatePrompt !== 'function') {
+      const validator = global.PromptValidation || window.PromptValidation;
+      if (!validator || typeof validator.validatePrompt !== 'function') {
         if (formMessage) {
           formMessage.textContent = 'Erro de segurança: Sistema de validação indisponível.';
           formMessage.className = 'form-message error';
@@ -108,7 +109,7 @@
         existingPrompts = global.PromptOpsStorage.getAllPrompts();
       }
       
-      const validationResult = global.PromptValidation.validatePrompt(candidate, existingPrompts);
+      const validationResult = validator.validatePrompt(candidate, existingPrompts);
       if (!validationResult.valid) {
         const errorMessages = Array.isArray(validationResult.errors)
           ? validationResult.errors.map(err => typeof err === 'object' && err !== null ? (err.message || JSON.stringify(err)) : err)
