@@ -46,9 +46,14 @@
     return (basePrompts || []).concat(persisted);
   }
 
+  function getAllPrompts() {
+    return loadPersistedPrompts();
+  }
+
   global.PromptOpsStorage = Object.freeze({
     loadPersistedPrompts: loadPersistedPrompts,
     saveNewPrompt: saveNewPrompt,
-    getConsolidatedPrompts: getConsolidatedPrompts
+    getConsolidatedPrompts: getConsolidatedPrompts,
+    getAllPrompts: getAllPrompts
   });
 })(globalThis);
