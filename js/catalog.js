@@ -527,6 +527,12 @@
     
     catalogAPI.refreshData = refreshData;
 
+    function getBasePrompts() {
+      return originalPrompts ? originalPrompts.slice() : [];
+    }
+
+    catalogAPI.getBasePrompts = getBasePrompts;
+
     // --------------------------------------------------------
     // POPULA FILTROS (categorias, subcategorias, status, maturidade)
     // --------------------------------------------------------
@@ -760,7 +766,8 @@
     createCard: createCard,
     filtrarPrompts: filtrarPrompts,
     limparFiltros: limparFiltros,
-    refreshData: function() {}
+    refreshData: function() {},
+    getBasePrompts: function() { return []; }
   };
 
   global.PromptOpsCatalog = catalogAPI;
