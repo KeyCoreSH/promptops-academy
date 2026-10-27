@@ -47,19 +47,9 @@
   }
 
   function getAllPrompts() {
-    var base = [];
-    if (global.PromptOpsCatalog) {
-      if (typeof global.PromptOpsCatalog.getAllPrompts === 'function') {
-        base = global.PromptOpsCatalog.getAllPrompts();
-      } else if (typeof global.PromptOpsCatalog.getPrompts === 'function') {
-        base = global.PromptOpsCatalog.getPrompts();
-      } else if (Array.isArray(global.PromptOpsCatalog.prompts)) {
-        base = global.PromptOpsCatalog.prompts;
-      }
-    }
-    if (!base.length && Array.isArray(global._promptOpsBasePrompts)) {
-      base = global._promptOpsBasePrompts;
-    }
+    var base = (global.PromptOpsCatalog && typeof global.PromptOpsCatalog.getBasePrompts === 'function') 
+      ? global.PromptOpsCatalog.getBasePrompts() 
+      : [];
     return getConsolidatedPrompts(base);
   }
 
