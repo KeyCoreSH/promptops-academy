@@ -47,7 +47,10 @@
   }
 
   function getAllPrompts() {
-    return loadPersistedPrompts();
+    var base = (global.PromptOpsCatalog && typeof global.PromptOpsCatalog.getBasePrompts === 'function') 
+      ? global.PromptOpsCatalog.getBasePrompts() 
+      : (global._promptOpsBasePrompts || []);
+    return getConsolidatedPrompts(base);
   }
 
   global.PromptOpsStorage = Object.freeze({
