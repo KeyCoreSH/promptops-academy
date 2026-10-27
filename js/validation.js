@@ -53,6 +53,14 @@
       });
     }
 
+    const subcategory = String(candidate.subcategory ?? "").trim();
+    if (!subcategory) {
+      errors.push({
+        field: "subcategory",
+        message: "Selecione uma subcategoria válida para o prompt."
+      });
+    }
+
     if (title && title.length >= 8) {
       const normalizedCandidateTitle = normalize(title);
 
