@@ -21,49 +21,43 @@ Um prompt sem contexto, evidência, histórico de teste ou relação com a próx
 
 **Encontrar → Entender → Copiar e testar → Registrar → Continuar**
 
-## Estado atual do fluxo navegável
+## Estado atual da versão publicada
 
-A Issue #19 foi validada ponta a ponta no estado atual de integração com as PRs #18 e #25.
+A versão consolidada do PromptOps Academy está integrada à `main` e publicada para validação.
 
 ### O que funciona
 
 - Página inicial e catálogo carregam normalmente.
-- Os 24 prompts são exibidos no catálogo.
+- O catálogo exibe 24 prompts.
 - Busca por título, objetivo e tags funciona.
-- Filtros de catálogo funcionam corretamente.
+- Filtros do catálogo funcionam corretamente.
 - Os cards abrem o detalhe correspondente em `prompt.html?id=...`.
-- O detalhe carrega os dados reais do prompt.
+- O detalhe carrega os dados do prompt.
 - A ação de copiar o prompt funciona.
 - O fluxo Detalhe → Laboratório funciona.
+- O Laboratório permite registrar o teste no navegador.
 - O retorno Laboratório → Início funciona.
 - O retorno Detalhe → Catálogo funciona.
-- IDs inexistentes exibem uma mensagem amigável sem quebrar a página.
-- O fluxo foi validado em desktop e mobile.
-- Os testes automatizados da navegação passaram: 5/5.
+- IDs inexistentes são tratados sem quebrar a aplicação.
+- O fluxo possui suporte a desktop e mobile.
+- Os testes automatizados e checks da versão consolidada foram aprovados.
 
-### Pendências de integração
+### Versão publicada
 
-- A PR #27 permanece em Draft até a consolidação definitiva das PRs #18 e #25 na `main`.
-- A PR #18 também possui um `prompt.html`; a PR #27 contém a versão funcional da tela de detalhe, então esse arquivo pode exigir reconciliação durante a integração final.
-- Caso a estrutura das PRs dependentes seja alterada antes do merge, o fluxo deverá ser validado novamente.
+A versão demonstrável está disponível em:
 
-### Como validar o fluxo
+https://keycoresh.github.io/promptops-academy/
 
-Com o projeto executando em servidor local:
+### Validação final
 
-1. Abra `index.html`.
-2. Confira o carregamento do catálogo com os 24 prompts.
-3. Teste busca e filtros.
-4. Abra um card e confirme a URL `prompt.html?id=...`.
-5. Verifique os dados exibidos no detalhe.
-6. Teste a ação de copiar.
-7. Acesse o Laboratório pela tela de detalhe.
-8. Retorne do Laboratório para o Início.
-9. Retorne do detalhe para o Catálogo.
-10. Teste um ID inexistente, por exemplo `prompt.html?id=NAO-EXISTE`.
-11. Repita o fluxo em viewport mobile.
+A versão publicada está em fase de validação e coleta de evidências.
 
-Resultado da última validação manual: **12/12 testes aprovados**.
+Pendências atuais:
+
+- concluir o aceite ponta a ponta e registrar as evidências finais;
+- conectar `js/validation.js` ao fluxo real do formulário e validar o cadastro;
+- ampliar os testes de busca, filtros e cadastro;
+- concluir a validação da experiência em desktop e mobile.
 
 
 ## Exercício individual
@@ -117,6 +111,12 @@ python3 -m http.server 8000
 Abra `http://localhost:8000`. O laboratório fica em `http://localhost:8000/public/laboratorio-de-prompts.html`.
 
 No VS Code, também funciona a extensão Live Server: clique com o botão direito em `index.html` e escolha "Open with Live Server".
+
+### Executar a versão publicada
+
+Para validar a versão atual sem configurar um servidor local, acesse:
+
+https://keycoresh.github.io/promptops-academy/
 
 ## Regra de caminhos relativos
 
