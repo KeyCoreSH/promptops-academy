@@ -42,11 +42,28 @@ A versão consolidada do PromptOps Academy está integrada à `main` e publicada
 - O fluxo possui suporte a desktop e mobile.
 - Os testes automatizados e checks da versão consolidada foram aprovados.
 
-### Versão publicada
+### Versão publicada 
 
 A versão demonstrável está disponível em:
 
-https://keycoresh.github.io/promptops-academy/
+https://prompts.keycore.com.br
+
+### Publicação
+
+A versão oficial de demonstração está publicada em:
+
+https://prompts.keycore.com.br
+
+O ambiente é publicado pelo Coolify a partir da branch `main`.
+
+Após uma alteração ser revisada, aprovada e integrada à `main`, o deploy pode ser executado automaticamente no ambiente público.
+
+Por esse motivo:
+
+- alterações devem ser feitas em branches separadas;
+- toda entrega deve passar por Pull Request;
+- os checks devem estar aprovados antes do merge;
+- após o deploy, a versão pública deve ser validada novamente.
 
 ### Validação final
 
@@ -116,7 +133,7 @@ No VS Code, também funciona a extensão Live Server: clique com o botão direit
 
 Para validar a versão atual sem configurar um servidor local, acesse:
 
-https://keycoresh.github.io/promptops-academy/
+https://prompts.keycore.com.br
 
 ## Regra de caminhos relativos
 
