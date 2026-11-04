@@ -20,6 +20,7 @@ const valido = (extra = {}) => ({
   title: TITULO_8,
   content: PROMPT_80,
   category: 'operacoes',
+  subcategory: 'diagnostico_operacional',
   ...extra
 });
 
@@ -58,25 +59,25 @@ test('Q05: título e prompt abaixo do mínimo geram os dois erros', () => {
 });
 
 test('Q07: campos vazios são bloqueados e cada campo aparece no erro', () => {
-  const resultado = validatePrompt({ title: '', content: '', category: '' });
+  const resultado = validatePrompt({ title: '', content: '', category: '', subcategory: '' });
   assert.equal(resultado.valid, false);
-  assert.deepEqual(camposComErro(resultado).sort(), ['category', 'content', 'title']);
+  assert.deepEqual(camposComErro(resultado).sort(), ['category', 'content', 'subcategory', 'title']);
 });
 
 test('Q07: só espaços contam como vazio', () => {
-  const resultado = validatePrompt({ title: '        ', content: ' '.repeat(100), category: '   ' });
+  const resultado = validatePrompt({ title: '        ', content: ' '.repeat(100), category: '   ', subcategory: '   ' });
   assert.equal(resultado.valid, false);
-  assert.deepEqual(camposComErro(resultado).sort(), ['category', 'content', 'title']);
+  assert.deepEqual(camposComErro(resultado).sort(), ['category', 'content', 'subcategory', 'title']);
 });
 
 test('espaços nas pontas não contam para o mínimo de caracteres', () => {
-  const resultado = validatePrompt(valido({ title: '  ' + TITULO_7 + '  ' }));
+  const resultado = validatePrompt(valido({ title: ' ' + TITULO_7 + ' ' }));
   assert.equal(resultado.valid, false);
   assert.deepEqual(camposComErro(resultado), ['title']);
 });
 
 test('o campo "prompt" também é aceito no lugar de "content"', () => {
-  const resultado = validatePrompt({ title: TITULO_8, prompt: PROMPT_80, category: 'operacoes' });
+  const resultado = validatePrompt({ title: TITULO_8, prompt: PROMPT_80, category: 'operacoes', subcategory: 'diagnostico_operacional' });
   assert.equal(resultado.valid, true);
 });
 
@@ -105,7 +106,7 @@ test('Q07: título repetido é bloqueado (comportamento atual: compara o título
 test('duplicidade ignora maiúsculas, acentos e espaços repetidos', () => {
   const existentes = [{ id: 'OP-01', title: 'Organizar relato operacional' }];
   const resultado = validatePrompt(
-    valido({ title: '  ORGANIZAR   relato  operacional ' }),
+    valido({ title: '  ORGANIZAR    relato  operacional ' }),
     existentes
   );
   assert.equal(resultado.valid, false);
