@@ -109,7 +109,9 @@
         existingPrompts = global.PromptOpsStorage.getAllPrompts();
       }
       
-      const validationResult = validator.validatePrompt(candidate, existingPrompts);
+      const validationResult = validator.validatePrompt(candidate, existingPrompts, {
+        categories: categoriesData
+      });
       if (!validationResult.valid) {
         const errorMessages = Array.isArray(validationResult.errors)
           ? validationResult.errors.map(err => typeof err === 'object' && err !== null ? (err.message || JSON.stringify(err)) : err)
