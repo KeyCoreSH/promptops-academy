@@ -16,6 +16,19 @@ const TITULO_8 = 'Gargalos';
 const PROMPT_79 = 'Você é analista de operações. Liste os gargalos do relato e cite cada evidência';
 const PROMPT_80 = PROMPT_79 + '.';
 
+const mockCategorias = [
+  {
+    id: 'operacoes',
+    name: 'Operações e Processos',
+    subcategories: ['diagnostico_operacional', 'otimizacao']
+  },
+  {
+    id: 'rh',
+    name: 'Recursos Humanos',
+    subcategories: ['recrutamento']
+  }
+];
+
 const valido = (extra = {}) => ({
   title: TITULO_8,
   content: PROMPT_80,
@@ -133,19 +146,28 @@ test('lista de existentes com itens inválidos não quebra a validação', () =>
   assert.equal(resultado.valid, true);
 });
 
-test('guia p. 9: duplicidade exata pelo texto do prompt (a decidir com o Rogério)', { todo: 'comparação hoje é pelo título' }, () => {
-  const existentes = [{ id: 'OP-02', title: 'Outro título qualquer', content: PROMPT_80 }];
-  const resultado = validatePrompt(valido({ title: TITULO_8 }), existentes);
+test('guia: duplicidade exata pelo texto do prompt', () => {
+  const existentes = [{ id: 'OP-02', title: 'Título Totalmente Diferente', content: PROMPT_80 }];
+  const resultado = validatePrompt(valido({ title: 'Novo Título Válido' }), existentes);
   assert.equal(resultado.valid, false);
+  assert.deepEqual(camposComErro(resultado), ['content']);
+  assert.equal(resultado.errors[0].message, 'Já existe um prompt cadastrado com este texto de prompt.');
 });
 
-test('guia p. 9: subcategoria deve pertencer à categoria escolhida', { todo: 'validation.js não recebe subcategoria' }, () => {
-  const resultado = validatePrompt(valido({ subcategory: 'inexistente' }));
-  assert.equal(resultado.valid, false);
-});
+test('guia: subcategoria deve pertencer à categoria escolhida', () => {
+  const resultadoInvalido = validatePrompt(
+    valido({ category: 'operacoes', subcategory: 'recrutamento' }),
+    [],
+    { categories: mockCategorias }
+  );
+  assert.equal(resultadoInvalido.valid, false);
+  assert.deepEqual(camposComErro(resultadoInvalido), ['subcategory']);
+  assert.equal(resultadoInvalido.errors[0].message, 'A subcategoria selecionada não pertence à categoria informada.');
 
-test('guia p. 9: mensagem de duplicidade do guia', { todo: 'mensagem atual fala em título' }, () => {
-  const existentes = [{ id: 'OP-02', title: TITULO_8 }];
-  const resultado = validatePrompt(valido(), existentes);
-  assert.match(resultado.errors[0].message, /Já existe um prompt com este texto/);
+  const resultadoValido = validatePrompt(
+    valido({ category: 'operacoes', subcategory: 'diagnostico_operacional' }),
+    [],
+    { categories: mockCategorias }
+  );
+  assert.equal(resultadoValido.valid, true);
 });
