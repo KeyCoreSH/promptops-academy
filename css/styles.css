@@ -213,6 +213,26 @@ a.nav-link:hover {
   cursor: pointer;
 }
 
+.menu-toggle > svg,
+.profile-chevron {
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.menu-toggle > svg {
+  width: 22px;
+  height: 22px;
+}
+
+.profile-chevron {
+  width: 14px;
+  height: 14px;
+}
+
 .search-field {
   display: flex;
   align-items: center;
@@ -660,7 +680,8 @@ a.nav-link:hover {
   }
 
   .profile strong,
-  .profile > span:last-child {
+  .profile > span:last-child,
+  .profile-chevron {
     display: none;
   }
 
