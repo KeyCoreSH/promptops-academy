@@ -254,6 +254,17 @@
   border: 1px solid transparent;
 }
 
+.btn > svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .btn-primary {
   background: var(--primary, #354d9d);
   color: #ffffff;
