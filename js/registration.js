@@ -15,6 +15,7 @@
     const formSubcategory = form.elements.subcategoryId;
 
     let categoriesData = [];
+    let versionsData = [];
 
     fetch('./data/prompts.json')
       .then(response => response.json())
@@ -22,6 +23,9 @@
         if (data && Array.isArray(data.categories)) {
           categoriesData = data.categories;
           fillFormCategories();
+        }
+        if (data && Array.isArray(data.versions)) {
+          versionsData = data.versions;
         }
       })
       .catch(error => {
@@ -108,9 +112,33 @@
       if (global.PromptOpsStorage && typeof global.PromptOpsStorage.getAllPrompts === 'function') {
         existingPrompts = global.PromptOpsStorage.getAllPrompts();
       }
+
+      const versionsById = new Map(
+        versionsData
+          .filter(v => v && v.id != null)
+          .map(v => [String(v.id), v])
+      );
+
+      const hydratedPrompts = existingPrompts.map(prompt => {
+        if (!prompt || typeof prompt !== 'object') return prompt;
+        const activeVersion = prompt.currentVersionId != null
+          ? versionsById.get(String(prompt.currentVersionId))
+          : null;
+        const resolvedText =
+          activeVersion?.text ??
+          prompt.content ??
+          prompt.version?.text ??
+          prompt.prompt ??
+          '';
+        return {
+          ...prompt,
+          content: resolvedText
+        };
+      });
       
-      const validationResult = validator.validatePrompt(candidate, existingPrompts, {
-        categories: categoriesData
+      const validationResult = validator.validatePrompt(candidate, hydratedPrompts, {
+        categories: categoriesData,
+        versions: versionsData
       });
       if (!validationResult.valid) {
         const errorMessages = Array.isArray(validationResult.errors)
