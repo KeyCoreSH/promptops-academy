@@ -12,6 +12,12 @@
     const errors = [];
     const ignoreId = options.ignoreId;
     const categories = options.categories || [];
+    const versions = Array.isArray(options.versions) ? options.versions : [];
+    const versionsById = new Map(
+      versions
+        .filter((v) => v && v.id != null)
+        .map((v) => [String(v.id), v])
+    );
 
     if (!candidate || typeof candidate !== "object") {
       return {
@@ -117,7 +123,17 @@
             return false;
           }
 
-          const promptContent = prompt.content ?? prompt.version?.text ?? prompt.prompt ?? "";
+          const linkedVersion =
+            prompt.currentVersionId != null
+              ? versionsById.get(String(prompt.currentVersionId))
+              : null;
+
+          const promptContent =
+            prompt.content ??
+            linkedVersion?.text ??
+            prompt.version?.text ??
+            prompt.prompt ??
+            "";
           return promptContent && normalize(promptContent) === normalizedCandidateContent;
         });
 
