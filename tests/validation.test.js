@@ -171,3 +171,31 @@ test('guia: subcategoria deve pertencer à categoria escolhida', () => {
   );
   assert.equal(resultadoValido.valid, true);
 });
+
+test('regressão: bloqueia texto igual ao de OP-01 (currentVersionId) mesmo com título novo', () => {
+  const catalogData = JSON.parse(fs.readFileSync(path.join(root, 'data/prompts.json'), 'utf8'));
+  const basePrompt = (catalogData.prompts || []).find((p) => p.id === 'OP-01');
+  assert.ok(basePrompt);
+  assert.ok(basePrompt.currentVersionId);
+
+  const version = (catalogData.versions || []).find((v) => v.id === basePrompt.currentVersionId);
+  assert.ok(version && version.text);
+
+  const resultado = validatePrompt(
+    {
+      title: 'Título Novo Sem Duplicar OP-01',
+      content: version.text,
+      category: basePrompt.categoryId,
+      subcategory: basePrompt.subcategoryId
+    },
+    catalogData.prompts,
+    {
+      categories: catalogData.categories,
+      versions: catalogData.versions
+    }
+  );
+
+  assert.equal(resultado.valid, false);
+  assert.deepEqual(camposComErro(resultado), ['content']);
+  assert.equal(resultado.errors[0].message, 'Já existe um prompt cadastrado com este texto de prompt.');
+});
