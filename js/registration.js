@@ -16,17 +16,22 @@
 
     let categoriesData = [];
     let versionsData = [];
+    let basePrompts = null;
 
     fetch('./data/prompts.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.json();
+      })
       .then(data => {
-        if (data && Array.isArray(data.categories)) {
-          categoriesData = data.categories;
-          fillFormCategories();
+        if (!data || !Array.isArray(data.categories) ||
+            !Array.isArray(data.prompts) || !Array.isArray(data.versions)) {
+          throw new Error('Catálogo inválido');
         }
-        if (data && Array.isArray(data.versions)) {
-          versionsData = data.versions;
-        }
+        categoriesData = data.categories;
+        basePrompts = data.prompts;
+        versionsData = data.versions;
+        fillFormCategories();
       })
       .catch(error => {
         console.error("Registration: Erro ao carregar categorias", error);
@@ -108,10 +113,15 @@
         subcategory: formData.get('subcategoryId')
       };
 
-      let existingPrompts = [];
-      if (global.PromptOpsStorage && typeof global.PromptOpsStorage.getAllPrompts === 'function') {
-        existingPrompts = global.PromptOpsStorage.getAllPrompts();
+      if (!basePrompts) {
+        formMessage.textContent = 'O catálogo ainda não está disponível. Recarregue a página e tente novamente.';
+        formMessage.className = 'form-message error';
+        formMessage.hidden = false;
+        return;
       }
+
+      const persisted = global.PromptOpsStorage?.loadPersistedPrompts?.() ?? [];
+      const existingPrompts = basePrompts.concat(persisted);
 
       const versionsById = new Map(
         versionsData
