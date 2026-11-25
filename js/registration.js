@@ -15,15 +15,23 @@
     const formSubcategory = form.elements.subcategoryId;
 
     let categoriesData = [];
+    let versionsData = [];
+    let basePrompts = null;
 
-    // Busca categorias do JSON para popular selects
     fetch('./data/prompts.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        return response.json();
+      })
       .then(data => {
-        if (data && Array.isArray(data.categories)) {
-          categoriesData = data.categories;
-          fillFormCategories();
+        if (!data || !Array.isArray(data.categories) ||
+            !Array.isArray(data.prompts) || !Array.isArray(data.versions)) {
+          throw new Error('Catálogo inválido');
         }
+        categoriesData = data.categories;
+        basePrompts = data.prompts;
+        versionsData = data.versions;
+        fillFormCategories();
       })
       .catch(error => {
         console.error("Registration: Erro ao carregar categorias", error);
@@ -83,27 +91,71 @@
       return prefix + '-' + Date.now() + '-' + Math.random().toString(16).slice(2);
     }
 
-    function validatePrompt(formData) {
-      const title = formData.get('title').trim();
-      const text = formData.get('text').trim();
-      const categoryId = formData.get('categoryId');
-      const subcategoryId = formData.get('subcategoryId');
-      
-      if (title.length < 8) return 'O título precisa ter pelo menos 8 caracteres.';
-      if (text.length < 80) return 'O texto do prompt precisa ter pelo menos 80 caracteres.';
-      if (!categoryId || !subcategoryId) return 'Selecione uma categoria e subcategoria válidas.';
-      
-      return '';
-    }
-
     form.addEventListener('submit', event => {
       event.preventDefault();
       
+      const validator = global.PromptValidation || window.PromptValidation;
+      if (!validator || typeof validator.validatePrompt !== 'function') {
+        if (formMessage) {
+          formMessage.textContent = 'Erro de segurança: Sistema de validação indisponível.';
+          formMessage.className = 'form-message error';
+          formMessage.hidden = false;
+        }
+        return;
+      }
+
       const formData = new FormData(form);
-      const error = validatePrompt(formData);
       
-      if (error) {
-        formMessage.textContent = error;
+      const candidate = {
+        title: formData.get('title'),
+        content: formData.get('text'),
+        category: formData.get('categoryId'),
+        subcategory: formData.get('subcategoryId')
+      };
+
+      if (!basePrompts) {
+        formMessage.textContent = 'O catálogo ainda não está disponível. Recarregue a página e tente novamente.';
+        formMessage.className = 'form-message error';
+        formMessage.hidden = false;
+        return;
+      }
+
+      const persisted = global.PromptOpsStorage?.loadPersistedPrompts?.() ?? [];
+      const existingPrompts = basePrompts.concat(persisted);
+
+      const versionsById = new Map(
+        versionsData
+          .filter(v => v && v.id != null)
+          .map(v => [String(v.id), v])
+      );
+
+      const hydratedPrompts = existingPrompts.map(prompt => {
+        if (!prompt || typeof prompt !== 'object') return prompt;
+        const activeVersion = prompt.currentVersionId != null
+          ? versionsById.get(String(prompt.currentVersionId))
+          : null;
+        const resolvedText =
+          activeVersion?.text ??
+          prompt.content ??
+          prompt.version?.text ??
+          prompt.prompt ??
+          '';
+        return {
+          ...prompt,
+          content: resolvedText
+        };
+      });
+      
+      const validationResult = validator.validatePrompt(candidate, hydratedPrompts, {
+        categories: categoriesData,
+        versions: versionsData
+      });
+      if (!validationResult.valid) {
+        const errorMessages = Array.isArray(validationResult.errors)
+          ? validationResult.errors.map(err => typeof err === 'object' && err !== null ? (err.message || JSON.stringify(err)) : err)
+          : ['Erro de validação'];
+        formMessage.textContent = errorMessages.join(', ');
+        formMessage.className = 'form-message error';
         formMessage.hidden = false;
         return;
       }
@@ -114,7 +166,6 @@
       const tagsString = formData.get('tags') || '';
       const tagsArray = tagsString.split(',').map(tag => tag.trim()).filter(Boolean);
 
-      // Adaptação dos dados ao formato utilizado em data/prompts.json
       const promptData = {
         id: promptId,
         title: formData.get('title').trim(),
@@ -142,7 +193,6 @@
         }
       };
       
-      // Chamada para camada de persistência
       if (global.PromptOpsStorage && typeof global.PromptOpsStorage.saveNewPrompt === 'function') {
         try {
           global.PromptOpsStorage.saveNewPrompt(promptData);

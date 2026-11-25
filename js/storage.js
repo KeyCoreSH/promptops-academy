@@ -46,9 +46,17 @@
     return (basePrompts || []).concat(persisted);
   }
 
+  function getAllPrompts() {
+    var base = (global.PromptOpsCatalog && typeof global.PromptOpsCatalog.getBasePrompts === 'function') 
+      ? global.PromptOpsCatalog.getBasePrompts() 
+      : [];
+    return getConsolidatedPrompts(base);
+  }
+
   global.PromptOpsStorage = Object.freeze({
     loadPersistedPrompts: loadPersistedPrompts,
     saveNewPrompt: saveNewPrompt,
-    getConsolidatedPrompts: getConsolidatedPrompts
+    getConsolidatedPrompts: getConsolidatedPrompts,
+    getAllPrompts: getAllPrompts
   });
 })(globalThis);

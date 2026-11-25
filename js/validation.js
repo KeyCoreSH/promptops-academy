@@ -11,6 +11,13 @@
   function validatePrompt(candidate, existingPrompts = [], options = {}) {
     const errors = [];
     const ignoreId = options.ignoreId;
+    const categories = options.categories || [];
+    const versions = Array.isArray(options.versions) ? options.versions : [];
+    const versionsById = new Map(
+      versions
+        .filter((v) => v && v.id != null)
+        .map((v) => [String(v.id), v])
+    );
 
     if (!candidate || typeof candidate !== "object") {
       return {
@@ -53,10 +60,36 @@
       });
     }
 
+    const subcategory = String(candidate.subcategory ?? "").trim();
+    if (!subcategory) {
+      errors.push({
+        field: "subcategory",
+        message: "Selecione uma subcategoria válida para o prompt."
+      });
+    }
+
+    if (category && subcategory && Array.isArray(categories) && categories.length > 0) {
+      const selectedCategory = categories.find((c) => c && c.id === category);
+      if (selectedCategory && Array.isArray(selectedCategory.subcategories)) {
+        const belongs = selectedCategory.subcategories.some((sub) => {
+          const subId = typeof sub === "string" ? sub : sub.id;
+          return subId === subcategory;
+        });
+
+        if (!belongs) {
+          errors.push({
+            field: "subcategory",
+            message: "A subcategoria selecionada não pertence à categoria informada."
+          });
+        }
+      }
+    }
+
     if (title && title.length >= 8) {
       const normalizedCandidateTitle = normalize(title);
+      const normalizedCandidateContent = normalize(content);
 
-      const isDuplicate = existingPrompts.some((prompt) => {
+      const duplicateByTitle = existingPrompts.some((prompt) => {
         if (!prompt || typeof prompt !== "object") return false;
 
         if (
@@ -71,11 +104,45 @@
         return normalize(promptTitle) === normalizedCandidateTitle;
       });
 
-      if (isDuplicate) {
+      if (duplicateByTitle) {
         errors.push({
           field: "title",
           message: "Já existe um prompt cadastrado com este título."
         });
+      }
+
+      if (content && content.length >= 80) {
+        const duplicateByContent = existingPrompts.some((prompt) => {
+          if (!prompt || typeof prompt !== "object") return false;
+
+          if (
+            ignoreId != null &&
+            prompt.id != null &&
+            String(prompt.id) === String(ignoreId)
+          ) {
+            return false;
+          }
+
+          const linkedVersion =
+            prompt.currentVersionId != null
+              ? versionsById.get(String(prompt.currentVersionId))
+              : null;
+
+          const promptContent =
+            prompt.content ??
+            linkedVersion?.text ??
+            prompt.version?.text ??
+            prompt.prompt ??
+            "";
+          return promptContent && normalize(promptContent) === normalizedCandidateContent;
+        });
+
+        if (duplicateByContent && !duplicateByTitle) {
+          errors.push({
+            field: "content",
+            message: "Já existe um prompt cadastrado com este texto de prompt."
+          });
+        }
       }
     }
 
